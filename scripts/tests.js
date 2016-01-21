@@ -16,6 +16,11 @@ var Test = Test || function() {
 			var battleship = new Battleship();
 			this.assert(typeof battleship.computer == 'function', 'battleship has a computer');
 		}
+		, battleshipCanGetBoard: function() {
+			var battleship = new Battleship();
+			this.assert(battleship.getBoard, 'battleship can get a board');
+		}
+		
 	}
 }
 
