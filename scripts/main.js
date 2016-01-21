@@ -1,1 +1,7 @@
-var Battleship = Battleship || function() {}
+var Battleship = Battleship || function() {
+	return {
+		player: function() {
+			
+		}
+	}
+}

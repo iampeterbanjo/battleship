@@ -8,6 +8,10 @@ var Test = Test || function() {
 			var battleship = new Battleship();
 			this.assert(battleship, 'has new Battleship');
 		}
+		, battleshipHasPlayer: function() {
+			var battleship = new Battleship();
+			this.assert(typeof battleship.player == 'function', 'battleship has a player');
+		}
 	}
 }
 
