@@ -1,0 +1,1 @@
+var Battleship = Battleship || function() {}
