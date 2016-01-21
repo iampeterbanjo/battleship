@@ -12,6 +12,10 @@ var Test = Test || function() {
 			var battleship = new Battleship();
 			this.assert(typeof battleship.player == 'function', 'battleship has a player');
 		}
+		, battleshipHasComputer: function() {
+			var battleship = new Battleship();
+			this.assert(typeof battleship.computer == 'function', 'battleship has a computer');
+		}
 	}
 }
 

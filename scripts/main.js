@@ -3,5 +3,8 @@ var Battleship = Battleship || function() {
 		player: function() {
 			
 		}
+		, computer: function() {
+			
+		}
 	}
 }
