@@ -4,6 +4,10 @@ var Test = Test || function() {
 			var status = !!test ? 'PASSED' : 'FAILED';
 			console[ !!test ? 'info': 'warn' ]('%s : %s', status, description);
 		}
+		, hasNewBattleship: function() {
+			var battleship = new Battleship();
+			this.assert(battleship, 'has new Battleship');
+		}
 	}
 }
 
