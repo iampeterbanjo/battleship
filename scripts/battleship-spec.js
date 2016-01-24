@@ -10,4 +10,10 @@ describe('battleship', function() {
 	it('should get a grid', function() {
 		expect(new Battleship().getGrid).toBeDefined()
 	});
+
+	it('should have a 10x10 grid', function() {
+		var grid = new Battleship().getGrid();
+		expect(grid.width).toBe(10);
+		expect(grid.height).toBe(10);
+	});
 });

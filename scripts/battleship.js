@@ -1,5 +1,9 @@
 var Battleship = Battleship || function() {
-	var grid = "";
+	var self = this;
+
+	self.grid = {}
+	self.grid.width = 10;
+	self.grid.height = 10;
 
 	return {
 		player: function() {
@@ -9,7 +13,7 @@ var Battleship = Battleship || function() {
 
 		}
 		, getGrid: function() {
-			return grid;
+			return self.grid;
 		}
 	}
 }
