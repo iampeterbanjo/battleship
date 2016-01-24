@@ -1,15 +1,15 @@
 var Battleship = Battleship || function() {
-	var board = "";
-	
+	var grid = "";
+
 	return {
 		player: function() {
-			
+
 		}
 		, computer: function() {
-			
+
 		}
-		, getBoard: function() {
-			return board;
+		, getGrid: function() {
+			return grid;
 		}
 	}
 }
