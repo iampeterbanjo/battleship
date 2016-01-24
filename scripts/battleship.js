@@ -1,4 +1,4 @@
-var Battleship = Battleship || function() {
+var Game = Game || function() {
 	var self = this;
 
 	self.grid = {}
@@ -15,8 +15,10 @@ var Battleship = Battleship || function() {
 		, getGrid: function() {
 			return self.grid;
 		}
-		, getBattleship: function() {
-			
+		, createBattleship: function() {
+			return {
+				location: new Array(5)
+			}
 		}
 	}
 }

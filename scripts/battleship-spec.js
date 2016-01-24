@@ -1,23 +1,29 @@
-describe('battleship', function() {
+describe('the Game', function() {
 	it('should have a player', function() {
-		expect(new Battleship().player).toBeDefined()
+		expect(new Game().player).toBeDefined()
 	});
 
 	it('should have a computer', function() {
-		expect(new Battleship().computer).toBeDefined()
+		expect(new Game().computer).toBeDefined()
 	});
 
 	it('should get a grid', function() {
-		expect(new Battleship().getGrid).toBeDefined()
+		expect(new Game().getGrid).toBeDefined()
 	});
 
 	it('should have a 10x10 grid', function() {
-		var grid = new Battleship().getGrid();
+		var grid = new Game().getGrid();
 		expect(grid.width).toBe(10);
 		expect(grid.height).toBe(10);
 	});
 
-	it('should have a battleship', function() {
-		expect(new Battleship().getBattleship).toBeDefined();
+	it('should create a ships', function() {
+		expect(new Game().createBattleship).toBeDefined();
+	});
+
+	it('should create a battleship on 5 squares', function() {
+		var game = new Game()
+				, battleship = game.createBattleship()
+		expect(battleship.location.length).toBe(5)
 	});
 });
