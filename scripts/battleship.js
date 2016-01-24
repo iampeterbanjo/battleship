@@ -20,5 +20,8 @@ var Game = Game || function() {
 				location: new Array(5)
 			}
 		}
+		, createDestroyer: function() {
+			
+		}
 	}
 }

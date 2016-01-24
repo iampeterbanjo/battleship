@@ -17,7 +17,7 @@ describe('the Game', function() {
 		expect(grid.height).toBe(10);
 	});
 
-	it('should create a ships', function() {
+	it('should create a battleships', function() {
 		expect(new Game().createBattleship).toBeDefined();
 	});
 
@@ -25,5 +25,9 @@ describe('the Game', function() {
 		var game = new Game()
 				, battleship = game.createBattleship()
 		expect(battleship.location.length).toBe(5)
+	});
+
+	it('should create destroyers', function() {
+		expect(new Game().createDestroyer).toBeDefined();
 	});
 });
