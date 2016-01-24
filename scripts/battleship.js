@@ -15,5 +15,8 @@ var Battleship = Battleship || function() {
 		, getGrid: function() {
 			return self.grid;
 		}
+		, getBattleship: function() {
+			
+		}
 	}
 }

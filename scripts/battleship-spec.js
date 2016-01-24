@@ -16,4 +16,8 @@ describe('battleship', function() {
 		expect(grid.width).toBe(10);
 		expect(grid.height).toBe(10);
 	});
+
+	it('should have a battleship', function() {
+		expect(new Battleship().getBattleship).toBeDefined();
+	});
 });
