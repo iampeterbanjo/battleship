@@ -1,14 +1,14 @@
 describe('the Game', function() {
 	it('should have a player', function() {
-		expect(new Game().player).toBeDefined()
+		expect(new Game().player).toBeDefined();
 	});
 
 	it('should have a computer', function() {
-		expect(new Game().computer).toBeDefined()
+		expect(new Game().computer).toBeDefined();
 	});
 
 	it('should get a grid', function() {
-		expect(new Game().getGrid).toBeDefined()
+		expect(new Game().getGrid).toBeDefined();
 	});
 
 	it('should have a 10x10 grid', function() {
@@ -23,11 +23,16 @@ describe('the Game', function() {
 
 	it('should create a battleship on 5 squares', function() {
 		var game = new Game()
-				, battleship = game.createBattleship()
-		expect(battleship.location.length).toBe(5)
+		expect(game.createBattleship().location.length).toBe(5);
 	});
 
 	it('should create destroyers', function() {
 		expect(new Game().createDestroyer).toBeDefined();
+	});
+
+	it('should create a destroyer on 4 squares', function() {
+		var game = new Game()
+				, destroyer = game.createDestroyer();
+		expect(destroyer.location.length).toBe(4);
 	});
 });
