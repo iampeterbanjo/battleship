@@ -5,6 +5,7 @@ var Game = Game || function() {
 	self.grid.width = 10;
 	self.grid.height = 10;
 
+	// SHIPS //
 	function Ship(size) {
 		return {
 			location: new Array(size)
@@ -34,9 +35,20 @@ var Game = Game || function() {
 		return this.ShipType();
 	}
 
-	return {
-		player: function() {
+	// PLAYERS //
+	function Player() {
+		return {
+			ships: []
+		}
+	}
 
+	return {
+		human: function() {
+			var player = new Player();
+
+			return {
+				getShips: function() {}
+			}
 		}
 		, computer: function() {
 
