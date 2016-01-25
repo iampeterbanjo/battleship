@@ -7,9 +7,7 @@ var Game = Game || function() {
 
 	// SHIPS //
 	function Ship(size) {
-		return {
-			location: new Array(size)
-		};
+		this.location = new Array(size);
 	}
 
 	function Destroyer(){
@@ -37,9 +35,7 @@ var Game = Game || function() {
 
 	// PLAYERS //
 	function Player() {
-		return {
-			ships: []
-		}
+		this.ships = [];
 	}
 
 	return {
@@ -51,7 +47,11 @@ var Game = Game || function() {
 			}
 		}
 		, computer: function() {
+			var player = new Player();
 
+			return {
+				getShips: function() {}
+			}
 		}
 		, getGrid: function() {
 			return self.grid;
