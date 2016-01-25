@@ -44,5 +44,9 @@ describe('Battleships', function() {
 
 			expect(human.getShips).toBeDefined();
 		});
+
+		it('should have only 3 ships', function() {
+			expect(new Game().human().getShips().length).toBe(3);
+		})
 	});
 });

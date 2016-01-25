@@ -35,23 +35,22 @@ var Game = Game || function() {
 
 	// PLAYERS //
 	function Player() {
-		this.ships = [];
+		this.ships = new Array(3);
+		this.getShips = function() {
+			return this.ships;
+		}
 	}
 
 	return {
 		human: function() {
 			var player = new Player();
 
-			return {
-				getShips: function() {}
-			}
+			return player;
 		}
 		, computer: function() {
 			var player = new Player();
 
-			return {
-				getShips: function() {}
-			}
+			return player;
 		}
 		, getGrid: function() {
 			return self.grid;
