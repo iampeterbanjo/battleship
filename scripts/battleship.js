@@ -6,16 +6,17 @@ var Game = Game || function() {
 	self.grid.height = 10;
 
 	// SHIPS //
-	function Ship(size) {
-		this.location = new Array(size);
+	function Ship(args) {
+		this.location = new Array(args.size);
+		this.type = args.type;
 	}
 
 	function Destroyer(){
-		return new Ship(4);
+		return new Ship({size: 4, type: 'destroyer'});
 	}
 
 	function Battleship() {
-		return new Ship(5);
+		return new Ship({size: 5, type: 'battleship'});
 	}
 
 	var ShipFactory = function(type) {
@@ -36,6 +37,12 @@ var Game = Game || function() {
 	// PLAYERS //
 	function Player() {
 		this.ships = new Array(3);
+		this.init = function() {
+			this.ships.map(function(ship, index) {
+			console.log('index');
+				return index;
+			});
+		}
 		this.getShips = function() {
 			return this.ships;
 		}
@@ -44,6 +51,7 @@ var Game = Game || function() {
 	return {
 		human: function() {
 			var player = new Player();
+			player.init();
 
 			return player;
 		}
