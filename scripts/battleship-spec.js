@@ -36,7 +36,7 @@ describe('Battleships', function() {
 					, destroyer = game.createDestroyer();
 			expect(destroyer.location.length).toBe(4);
 		});
-	});
+	}); // The Game
 
 	describe('the Player(s)', function() {
 		it('should have ships', function() {
@@ -64,11 +64,11 @@ describe('Battleships', function() {
 			expect(battleship.length).toBe(1);
 			expect(destroyers.length).toBe(2);
 		});
+	});	// the Players
 
-		describe('the Ships', function() {
-			it('should have a way to set a location on the grid', function() {
-				expect(new Game().createDestroyer().setLocation).toBeDefined();
-			});
+	describe('the Ships', function() {
+		it('should have a way to set a location on the grid', function() {
+			expect(new Game().createDestroyer().setLocation).toBeDefined();
 		});
-	});
+	}); // the Ships
 });
