@@ -53,9 +53,7 @@ describe('Battleships', function() {
 			var battleship = [], destroyers = []
 					, ships = new Game().human().getShips();
 
-			console.log(ships);
 			ships.map(function(ship) {
-				console.log(ship);
 				if(ship.type === 'destroyer') {
 					destroyers.push(ship);
 				} else if(ship.type === 'battleship') {

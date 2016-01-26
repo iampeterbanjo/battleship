@@ -36,11 +36,15 @@ var Game = Game || function() {
 
 	// PLAYERS //
 	function Player() {
-		this.ships = new Array(3);
+		this.ships = new Array(3).fill(0);
 		this.init = function() {
-			this.ships.map(function(ship, index) {
-			console.log('index');
-				return index;
+			this.ships = this.ships.map(function(ship, index) {
+				if(index === 0) {
+					ship = ShipFactory('battleship');
+				} else {
+					ship = ShipFactory('destroyer');
+				}
+				return ship;
 			});
 		}
 		this.getShips = function() {
