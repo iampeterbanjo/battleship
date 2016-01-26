@@ -67,8 +67,9 @@ describe('Battleships', function() {
 	});	// the Players
 
 	describe('the Ships', function() {
-		it('should have a way to set a location on the grid', function() {
+		it('should have a way to get/set a location on the grid', function() {
 			expect(new Game().createDestroyer().setLocation).toBeDefined();
+			expect(new Game().createDestroyer().getLocation).toBeDefined();
 		});
 	}); // the Ships
 });
