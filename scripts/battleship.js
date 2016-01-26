@@ -34,6 +34,14 @@ var Game = Game || function() {
 		return this.ShipType();
 	}
 
+	function createBattleship() {
+		return ShipFactory('battleship');
+	}
+
+	function createDestroyer() {
+		return ShipFactory('destroyer');
+	}
+
 	// PLAYERS //
 	function Player() {
 		// fill the array or else map wont work
@@ -41,9 +49,9 @@ var Game = Game || function() {
 		this.init = function() {
 			this.ships = this.ships.map(function(ship, index) {
 				if(index === 0) {
-					ship = ShipFactory('battleship');
+					ship = createBattleship();
 				} else {
-					ship = ShipFactory('destroyer');
+					ship = createDestroyer();
 				}
 				return ship;
 			});
@@ -68,11 +76,7 @@ var Game = Game || function() {
 		, getGrid: function() {
 			return self.grid;
 		}
-		, createBattleship: function() {
-			return ShipFactory('battleship');
-		}
-		, createDestroyer: function() {
-			return ShipFactory('destroyer');
-		}
+		, createBattleship: createBattleship
+		, createDestroyer: createDestroyer
 	}
 }
