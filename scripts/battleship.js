@@ -15,7 +15,6 @@ var Game = Game || function() {
 		 * @param {object} x, y, vertical
 		 */
 		this.setPosition = function(args) {
-			console.log('size: %s', this.size);
 			this.position = this.position.map(function(loc, index) {
 				return loc = {x: args.x, y: args.y + index, vertical: args.vertical};
 			});
