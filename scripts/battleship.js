@@ -7,10 +7,22 @@ var Game = Game || function() {
 
 	// SHIPS //
 	function Ship(args) {
-		this.location = new Array(args.size);
+		this.position = new Array(args.size).fill(0);
 		this.type = args.type;
-		this.setLocation = function() {};
-		this.getLocation = function() {};
+		this.size = args.size;
+		/**
+		 * Sets the position of a ship
+		 * @param {object} x, y, vertical
+		 */
+		this.setPosition = function(args) {
+			console.log('size: %s', this.size);
+			this.position = this.position.map(function(loc, index) {
+				return loc = {x: args.x, y: args.y + index, vertical: args.vertical};
+			});
+		};
+		this.getPosition = function() {
+			return this.position;
+		};
 	}
 
 	function Destroyer(){

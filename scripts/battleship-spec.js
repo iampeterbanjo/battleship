@@ -24,7 +24,7 @@ describe('Battleships', function() {
 
 		it('should create a battleship on 5 squares', function() {
 			var game = new Game()
-			expect(game.createBattleship().location.length).toBe(5);
+			expect(game.createBattleship().getPosition().length).toBe(5);
 		});
 
 		it('should create destroyers', function() {
@@ -34,7 +34,7 @@ describe('Battleships', function() {
 		it('should create a destroyer on 4 squares', function() {
 			var game = new Game()
 					, destroyer = game.createDestroyer();
-			expect(destroyer.location.length).toBe(4);
+			expect(destroyer.getPosition().length).toBe(4);
 		});
 	}); // The Game
 
@@ -67,9 +67,21 @@ describe('Battleships', function() {
 	});	// the Players
 
 	describe('the Ships', function() {
-		it('should have a way to get/set a location on the grid', function() {
-			expect(new Game().createDestroyer().setLocation).toBeDefined();
-			expect(new Game().createDestroyer().getLocation).toBeDefined();
+		it('should have a way to get/set a position on the grid', function() {
+			expect(new Game().createDestroyer().setPosition).toBeDefined();
+			expect(new Game().createDestroyer().getPosition).toBeDefined();
+		});
+
+		it('should set a position', function() {
+			var battleship = new Game().createBattleship()
+					, position;
+
+			battleship.setPosition({x: 'A', y: 5, vertical: false});
+			position = battleship.getPosition();
+
+			expect(position[0].x).toBe('A');
+			expect(position[0].y).toBe(5);
+			expect(position[0].vertical).toBe(false);
 		});
 	}); // the Ships
 });
