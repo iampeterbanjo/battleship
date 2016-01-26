@@ -36,6 +36,7 @@ var Game = Game || function() {
 
 	// PLAYERS //
 	function Player() {
+		// fill the array or else map wont work
 		this.ships = new Array(3).fill(0);
 		this.init = function() {
 			this.ships = this.ships.map(function(ship, index) {
