@@ -18,7 +18,7 @@ describe('Battleships', function() {
 			expect(grid.height).toBe(10);
 		});
 
-		it('should create a battleships', function() {
+		it('should create battleships', function() {
 			expect(new Game().createBattleship).toBeDefined();
 		});
 
@@ -38,8 +38,8 @@ describe('Battleships', function() {
 		});
 	});
 
-	describe('the player(s)', function() {
-		it('should ships', function() {
+	describe('the Player(s)', function() {
+		it('should have ships', function() {
 			var human = new Game().human();
 
 			expect(human.getShips).toBeDefined();
@@ -65,7 +65,7 @@ describe('Battleships', function() {
 			expect(destroyers.length).toBe(2);
 		});
 
-		describe('ships', function() {
+		describe('the Ships', function() {
 			it('should have a way to set a location on the grid', function() {
 				expect(new Game().createDestroyer().setLocation).toBeDefined();
 			});
