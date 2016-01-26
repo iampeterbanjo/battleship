@@ -64,5 +64,11 @@ describe('Battleships', function() {
 			expect(battleship.length).toBe(1);
 			expect(destroyers.length).toBe(2);
 		});
+
+		describe('ships', function() {
+			it('should have a way to set a location on the grid', function() {
+				expect(new Game().createDestroyer().setLocation).toBeDefined();
+			});
+		});
 	});
 });

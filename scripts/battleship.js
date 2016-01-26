@@ -9,6 +9,7 @@ var Game = Game || function() {
 	function Ship(args) {
 		this.location = new Array(args.size);
 		this.type = args.type;
+		this.setLocation = function() {};
 	}
 
 	function Destroyer(){
