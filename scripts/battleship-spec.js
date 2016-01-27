@@ -66,7 +66,7 @@ describe('Battleships', function() {
 		});
 	});	// the Players
 
-	describe('the Ships', function() {
+	describe('the Grid', function() {
 		it('should have a way to get/set a position on the grid', function() {
 			expect(new Game().createDestroyer().setPosition).toBeDefined();
 			expect(new Game().createDestroyer().getPosition).toBeDefined();
@@ -81,7 +81,6 @@ describe('Battleships', function() {
 
 			expect(position[0].x).toBe('A');
 			expect(position[0].y).toBe(5);
-			expect(position[0].vertical).toBe(false);
 		});
 	}); // the Ships
 });

@@ -1,7 +1,63 @@
 var Game = Game || function() {
 	var self = this;
 
-	self.grid = {}
+	// board is an array of [y][x] coordinates
+	self.board = new Array(self.grid.height).fill(new Array(self.grid.width).fill(0));
+
+	self.grid = {
+		/**
+		 * Checks if the proposed location for a ship
+		 * fits on the grid
+		 * @param {Ship} ship
+		 * @param {Object} position
+		 * @return {boolean} valid
+		 */
+		validPosition: function(ship, position) {
+			var valid = false;
+			if(position.vertical && position.y + ship.size < self.grid.height) {
+				valid = true;
+			} else if(!position.vertical && position.x + ship.size < self.grid.width) {
+				valid = true;
+			}
+
+			return valid;
+		}
+		/**
+		 * Gets a ship at a position if there is one
+		 *
+		 */
+		, getPosition: function(y, x) {
+			return self.board[y][x]
+		}
+		/**
+		 * Sets a ship at a position
+		 * @param {Ship} ship
+		 * @param {Object} position
+		 * @param {number} position.y
+		 * @param {number} position.x
+		 * @param {boolean} position.vertical
+		 */
+		, setPosition: function(ship, position) {
+			if(this.validPosition(ship, position)) {
+				var pos = {
+					type: ship.type
+					, start: position.vertical ? position.y : position.x
+					, end: position.vertical ? position.y + ship.size : position.x + ship.size
+				}
+
+				for (var index = 0; index < ship.size; index++) {
+					if(position.vertical) {
+						self.board[position.y + index][position.x] = pos;
+					} else {
+						self.board[position.y][position.x + index] = pos;
+					}
+				}
+			} else {
+				throw new Error('invalid position');
+			}
+		}
+	}
+
 	self.grid.width = 10;
 	self.grid.height = 10;
 
@@ -13,6 +69,8 @@ var Game = Game || function() {
 		/**
 		 * Sets the position of a ship
 		 * @param {object} x, y, vertical
+		 * A ship has a location
+		 * A location belongs to the Grid
 		 */
 		this.setPosition = function(args) {
 			this.position = this.position.map(function(loc, index) {
