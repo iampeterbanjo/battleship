@@ -8,12 +8,12 @@ describe('Battleships', function() {
 			expect(new Game().computer).toBeDefined();
 		});
 
-		it('should get a grid', function() {
-			expect(new Game().getGrid).toBeDefined();
+		it('should have a grid', function() {
+			expect(new Game().grid).toBeDefined();
 		});
 
 		it('should have a 10x10 grid', function() {
-			var grid = new Game().getGrid();
+			var grid = new Game().grid;
 			expect(grid.width).toBe(10);
 			expect(grid.height).toBe(10);
 		});
@@ -24,7 +24,7 @@ describe('Battleships', function() {
 
 		it('should create a battleship on 5 squares', function() {
 			var game = new Game()
-			expect(game.createBattleship().getPosition().length).toBe(5);
+			expect(game.createBattleship().size).toBe(5);
 		});
 
 		it('should create destroyers', function() {
@@ -34,7 +34,7 @@ describe('Battleships', function() {
 		it('should create a destroyer on 4 squares', function() {
 			var game = new Game()
 					, destroyer = game.createDestroyer();
-			expect(destroyer.getPosition().length).toBe(4);
+			expect(destroyer.size).toBe(4);
 		});
 	}); // The Game
 
@@ -66,21 +66,23 @@ describe('Battleships', function() {
 		});
 	});	// the Players
 
+	describe('the Ship(s)', function() {
+		it('should have a size', function() {
+			expect().toBe(false);
+		});
+		it('should have a type', function() {
+			expect().toBe(false);
+		});
+	});
+
 	describe('the Grid', function() {
 		it('should have a way to get/set a position on the grid', function() {
-			expect(new Game().createDestroyer().setPosition).toBeDefined();
-			expect(new Game().createDestroyer().getPosition).toBeDefined();
+			expect(new Game().grid.setPosition).toBeDefined();
+			expect(new Game().grid.getPosition).toBeDefined();
 		});
 
 		it('should set a position', function() {
-			var battleship = new Game().createBattleship()
-					, position;
-
-			battleship.setPosition({x: 'A', y: 5, vertical: false});
-			position = battleship.getPosition();
-
-			expect(position[0].x).toBe('A');
-			expect(position[0].y).toBe(5);
+			expect().toBe(false);
 		});
 	}); // the Ships
 });

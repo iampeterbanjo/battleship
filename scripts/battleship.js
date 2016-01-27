@@ -1,9 +1,6 @@
 var Game = Game || function() {
 	var self = this;
 
-	// board is an array of [y][x] coordinates
-	self.board = new Array(self.grid.height).fill(new Array(self.grid.width).fill(0));
-
 	self.grid = {
 		/**
 		 * Checks if the proposed location for a ship
@@ -14,9 +11,9 @@ var Game = Game || function() {
 		 */
 		validPosition: function(ship, position) {
 			var valid = false;
-			if(position.vertical && position.y + ship.size < self.grid.height) {
+			if(position.vertical && position.y + ship.size < this.grid.height) {
 				valid = true;
-			} else if(!position.vertical && position.x + ship.size < self.grid.width) {
+			} else if(!position.vertical && position.x + ship.size < this.grid.width) {
 				valid = true;
 			}
 
@@ -24,7 +21,8 @@ var Game = Game || function() {
 		}
 		/**
 		 * Gets a ship at a position if there is one
-		 *
+		 * @param {number} y
+		 * @param {number} x
 		 */
 		, getPosition: function(y, x) {
 			return self.board[y][x]
@@ -61,25 +59,14 @@ var Game = Game || function() {
 	self.grid.width = 10;
 	self.grid.height = 10;
 
+	// board is an array of [y][x] coordinates
+	// because rows will be drawn first
+	self.board = new Array(self.grid.height).fill(new Array(self.grid.width).fill(0));
+
 	// SHIPS //
 	function Ship(args) {
-		this.position = new Array(args.size).fill(0);
 		this.type = args.type;
 		this.size = args.size;
-		/**
-		 * Sets the position of a ship
-		 * @param {object} x, y, vertical
-		 * A ship has a location
-		 * A location belongs to the Grid
-		 */
-		this.setPosition = function(args) {
-			this.position = this.position.map(function(loc, index) {
-				return loc = {x: args.x, y: args.y + index, vertical: args.vertical};
-			});
-		};
-		this.getPosition = function() {
-			return this.position;
-		};
 	}
 
 	function Destroyer(){
@@ -144,9 +131,7 @@ var Game = Game || function() {
 
 			return player;
 		}
-		, getGrid: function() {
-			return self.grid;
-		}
+		, grid: self.grid
 		, createBattleship: createBattleship
 		, createDestroyer: createDestroyer
 	}
