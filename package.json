@@ -1,0 +1,24 @@
+{
+  "name": "battleship",
+  "version": "1.0.0",
+  "description": "Battleship game in JS",
+  "main": "battleship.js",
+  "scripts": {
+    "test": "testem"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iampeterbanjo/battleship.git"
+  },
+  "keywords": [
+    "battleship",
+    "game",
+    "js"
+  ],
+  "author": "peterbanjo@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iampeterbanjo/battleship/issues"
+  },
+  "homepage": "https://github.com/iampeterbanjo/battleship#readme"
+}
