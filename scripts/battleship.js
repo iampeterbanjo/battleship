@@ -2,6 +2,8 @@ var Game = Game || function() {
 	var self = this;
 
 	self.grid = {
+		width: 10
+		, height: 10
 		/**
 		 * Checks if the proposed location for a ship
 		 * fits on the grid
@@ -9,11 +11,11 @@ var Game = Game || function() {
 		 * @param {Object} position
 		 * @return {boolean} valid
 		 */
-		validPosition: function(ship, position) {
+		, validPosition: function(ship, position) {
 			var valid = false;
-			if(position.vertical && position.y + ship.size < this.grid.height) {
+			if(position.vertical && position.y + ship.size < this.height) {
 				valid = true;
-			} else if(!position.vertical && position.x + ship.size < this.grid.width) {
+			} else if(!position.vertical && position.x + ship.size < this.width) {
 				valid = true;
 			}
 
@@ -39,7 +41,7 @@ var Game = Game || function() {
 			if(this.validPosition(ship, position)) {
 				var pos = {
 					type: ship.type
-					, start: position.vertical ? position.y : position.x
+					, start: position.y
 					, end: position.vertical ? position.y + ship.size : position.x + ship.size
 				}
 
@@ -50,14 +52,13 @@ var Game = Game || function() {
 						self.board[position.y][position.x + index] = pos;
 					}
 				}
+
+				ship.position = pos;
 			} else {
 				throw new Error('invalid position');
 			}
 		}
 	}
-
-	self.grid.width = 10;
-	self.grid.height = 10;
 
 	// board is an array of [y][x] coordinates
 	// because rows will be drawn first
@@ -67,6 +68,7 @@ var Game = Game || function() {
 	function Ship(args) {
 		this.type = args.type;
 		this.size = args.size;
+		this.position = 0;
 	}
 
 	function Destroyer(){

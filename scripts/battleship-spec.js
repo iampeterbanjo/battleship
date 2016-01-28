@@ -67,22 +67,49 @@ describe('Battleships', function() {
 	});	// the Players
 
 	describe('the Ship(s)', function() {
+		var battleship;
+
+		beforeEach(function() {
+			battleship = new Game().createBattleship();
+		});
+
 		it('should have a size', function() {
-			expect().toBe(false);
+			expect(battleship.size).toBeDefined();
 		});
 		it('should have a type', function() {
-			expect().toBe(false);
+			expect(battleship.type).toBeDefined();
+		});
+		it('should have an unset position', function() {
+			expect(battleship.position).toBe(0);
 		});
 	});
 
 	describe('the Grid', function() {
+		var grid, game;
+
+		beforeEach(function() {
+			game = new Game();
+			grid = game.grid;
+		});
+
 		it('should have a way to get/set a position on the grid', function() {
-			expect(new Game().grid.setPosition).toBeDefined();
-			expect(new Game().grid.getPosition).toBeDefined();
+			expect(grid.setPosition).toBeDefined();
+			expect(grid.getPosition).toBeDefined();
 		});
 
 		it('should set a position', function() {
-			expect().toBe(false);
+			var battleship = game.createBattleship()
+					, position = {x: 2, y: 2, vertical: false};
+
+			expect(battleship.position).toBe(0);
+
+			grid.setPosition(battleship, position);
+
+			expect(battleship.position).toEqual({
+				start: position.y
+				, end: position.x + battleship.size
+				, type: battleship.type
+			});
 		});
 	}); // the Ships
 });
