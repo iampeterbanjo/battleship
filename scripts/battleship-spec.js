@@ -119,5 +119,19 @@ describe('Battleships', function() {
 				, type: battleship.type
 			});
 		});
+
+		it('should be able to locate', function() {
+			expect(grid.locate).toBeDefined();
+		});
+
+		it('should locate a ship given a position', function() {
+			var destroyer = game.createDestroyer()
+					, position = {x: 2, y: 2, vertical: false};
+
+			grid.setPosition(destroyer, position);
+			
+			expect(grid.locate({x: 0, y: 0})).toBe(false);
+			expect(grid.locate({x: position.x, y: position.y}).type).toBe('destroyer');
+		});
 	}); // the Grid
 });

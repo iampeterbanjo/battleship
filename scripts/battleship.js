@@ -58,11 +58,20 @@ var Game = Game || function() {
 				throw new Error('invalid position');
 			}
 		}
+		/**
+		 * Find a ship on the board given the coordinates
+		 * @param {Object} coordinates
+		 * @param {number} coordinates.x
+		 * @param {number} coordinates.y
+		 */
+		, locate: function(coordinates) {
+			return self.board[coordinates.y][coordinates.x];
+		}
 	}
 
 	// board is an array of [y][x] coordinates
 	// because rows will be drawn first
-	self.board = new Array(self.grid.height).fill(new Array(self.grid.width).fill(0));
+	self.board = new Array(self.grid.height).fill(new Array(self.grid.width).fill(false));
 
 	// SHIPS //
 	function Ship(args) {
