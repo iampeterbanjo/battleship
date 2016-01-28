@@ -4,7 +4,8 @@
   "description": "Battleship game in JS",
   "main": "battleship.js",
   "scripts": {
-    "test": "testem"
+    "test": "testem",
+    "docs": "documentation scripts/battleship.js --format md --shallow --output docs/README.md"
   },
   "repository": {
     "type": "git",
