@@ -90,7 +90,7 @@ describe('Battleships', function() {
 		it('should have an unset position', function() {
 			expect(battleship.position).toBe(0);
 		});
-	});
+	}); // the Ship(s)
 
 	describe('the Grid', function() {
 		var grid, game;
@@ -119,5 +119,5 @@ describe('Battleships', function() {
 				, type: battleship.type
 			});
 		});
-	}); // the Ships
+	}); // the Grid
 });
