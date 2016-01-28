@@ -43,19 +43,23 @@ describe('Battleships', function() {
 	}); // The Game
 
 	describe('the Player(s)', function() {
-		it('should have ships', function() {
-			var human = new Game().human();
+		var human;
 
+		beforeEach(function() {
+			human = new Game().human();
+		});
+
+		it('should have ships', function() {
 			expect(human.getShips).toBeDefined();
 		});
 
 		it('should have only 3 ships', function() {
-			expect(new Game().human().getShips().length).toBe(3);
+			expect(human.getShips().length).toBe(3);
 		});
 
 		it('should have 1 battleship and 2 destroyers', function() {
 			var battleship = [], destroyers = []
-					, ships = new Game().human().getShips();
+					, ships = human.getShips();
 
 			ships.map(function(ship) {
 				if(ship.type === 'destroyer') {
