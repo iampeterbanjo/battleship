@@ -5,7 +5,12 @@
   "main": "battleship.js",
   "scripts": {
     "test": "testem",
-    "docs": "documentation scripts/battleship.js --format md --shallow --output docs/README.md"
+    "proxy": "browser-sync start --proxy localhost:7357 --xip --no-open --port 4000",
+    "docs": "documentation scripts/battleship.js --format md --shallow --output docs/README.md",
+    "install": "npm install -g documentation parallelshell browser-sync chokidar-cli",
+    "dev": "parallelshell 'testem' 'npm run proxy' 'npm run watch:files'",
+    "watch:files": "chokidar '**/*.js' -c 'npm run build'",
+    "build": "parallelshell 'npm run docs'"
   },
   "repository": {
     "type": "git",
