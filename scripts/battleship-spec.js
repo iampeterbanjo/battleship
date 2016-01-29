@@ -84,11 +84,21 @@ describe('Battleships', function() {
 		it('should have a size', function() {
 			expect(battleship.size).toBeDefined();
 		});
+
 		it('should have a type', function() {
 			expect(battleship.type).toBeDefined();
 		});
+
 		it('should have an unset position', function() {
 			expect(battleship.position).toBe(0);
+		});
+
+		it('should not be destroyed', function() {
+			expect(battleship.destroyed).toBe(false);
+		});
+
+		it('should not be damaged', function() {
+			expect(battleship.damage).toEqual([]);
 		});
 	}); // the Ship(s)
 
@@ -129,7 +139,7 @@ describe('Battleships', function() {
 					, position = {x: 2, y: 2, vertical: false};
 
 			grid.setPosition(destroyer, position);
-			
+
 			expect(grid.locate({x: 0, y: 0})).toBe(false);
 			expect(grid.locate({x: position.x, y: position.y}).type).toBe('destroyer');
 		});

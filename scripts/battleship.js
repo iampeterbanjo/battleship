@@ -78,6 +78,8 @@ var Game = Game || function() {
 		this.type = args.type;
 		this.size = args.size;
 		this.position = 0;
+		this.destroyed = false;
+		this.damage = [];
 	}
 
 	function Destroyer(){
