@@ -29,6 +29,17 @@ Sets a ship at a position
     -   `position.x` **number** 
     -   `position.vertical` **boolean** 
 
+# target
+
+Targets a position on the grid and damages any
+ship located there
+
+**Parameters**
+
+-   `coordinates` **Object** 
+    -   `coordinates.x` **number** 
+    -   `coordinates.y` **number** 
+
 # validPosition
 
 Checks if the proposed location for a ship

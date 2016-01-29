@@ -143,5 +143,16 @@ describe('Battleships', function() {
 			expect(grid.locate({x: 0, y: 0})).toBe(false);
 			expect(grid.locate({x: position.x, y: position.y}).type).toBe('destroyer');
 		});
+
+		it('should damage a targeted ship', function() {
+			var destroyer = game.createDestroyer()
+					, position = {x: 2, y: 2, vertical: false}
+					, coordinates = {x: position.x, y: position.y};
+
+			grid.setPosition(destroyer, position);
+
+			expect(grid.target(coordinates)).toBe(true);
+			expect(destroyer.damage).toEqual([coordinates]);
+		});
 	}); // the Grid
 });

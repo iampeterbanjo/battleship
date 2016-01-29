@@ -43,6 +43,7 @@ var Game = Game || function() {
 					type: ship.type
 					, start: position.y
 					, end: position.vertical ? position.y + ship.size : position.x + ship.size
+					, _: ship
 				}
 
 				for (var index = 0; index < ship.size; index++) {
@@ -66,6 +67,22 @@ var Game = Game || function() {
 		 */
 		, locate: function(coordinates) {
 			return self.board[coordinates.y][coordinates.x];
+		}
+		/**
+		 * Targets a position on the grid and damages any
+		 * ship located there
+		 * @param {Object} coordinates
+		 * @param {number} coordinates.x
+		 * @param {number} coordinates.y
+		 */
+		, target: function(coordinates) {
+			var ship = this.locate(coordinates);
+console.log(ship);
+			if(ship) {
+				ship._.damage.push(coordinates);
+			}
+
+			return !!ship;
 		}
 	}
 
