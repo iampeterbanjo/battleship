@@ -163,5 +163,8 @@ var Game = Game || function() {
 		, grid: self.grid
 		, createBattleship: createBattleship
 		, createDestroyer: createDestroyer
+		, start: function() {
+			
+		}
 	}
 }

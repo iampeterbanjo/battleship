@@ -164,4 +164,15 @@ describe('Battleships', function() {
 			expect(destroyer.damage[0]).toEqual(coordinates);
 		});
 	}); // the Grid
+
+	describe('the Rules', function() {
+		var game;
+		beforeEach(function() {
+			game = new Game();
+		});
+
+		it('should start', function() {
+			expect(game.start).toBeDefined();
+		});
+	});
 });
