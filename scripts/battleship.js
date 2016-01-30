@@ -89,6 +89,21 @@ var Game = Game || function() {
 	// because rows will be drawn first
 	self.board = new Array(self.grid.height).fill(new Array(self.grid.width).fill(false));
 
+	/**
+	 * Gets a random int between min and max
+	 * @param {number} min
+	 * @param {number} max
+	 * @returns {number}
+	 */
+	self.getRandomInt = function(min, max) {
+		if(min > max) {
+			min++;
+		} else {
+			max++;
+		}
+		return Math.floor(min + Math.random() * (max - min));
+	}
+
 	// SHIPS //
 	function Ship(args) {
 		this.type = args.type;
@@ -134,12 +149,20 @@ var Game = Game || function() {
 		// fill the array or else map wont work
 		this.ships = new Array(3).fill(0);
 		this.init = function() {
+			var position = {
+				x: self.getRandomInt(0,4)
+				, y: self.getRandomInt(0,4)
+				, vertical: !!self.getRandomInt(0,1)
+			}
+
 			this.ships = this.ships.map(function(ship, index) {
 				if(index === 0) {
 					ship = createBattleship();
 				} else {
 					ship = createDestroyer();
 				}
+				self.grid.setPosition(ship, position);
+
 				return ship;
 			});
 		}
@@ -157,6 +180,7 @@ var Game = Game || function() {
 		}
 		, computer: function() {
 			var player = new Player();
+			player.init();
 
 			return player;
 		}
@@ -164,7 +188,7 @@ var Game = Game || function() {
 		, createBattleship: createBattleship
 		, createDestroyer: createDestroyer
 		, start: function() {
-			
+
 		}
 	}
 }

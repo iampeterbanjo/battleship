@@ -174,5 +174,10 @@ describe('Battleships', function() {
 		it('should start', function() {
 			expect(game.start).toBeDefined();
 		});
+
+		it('should start with player\'s ships at random positions', function() {
+			var ships = game.computer().getShips();
+			expect(ships[0].position).not.toEqual(ships[1].position);
+		});
 	});
 });

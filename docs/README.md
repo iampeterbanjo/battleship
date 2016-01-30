@@ -51,3 +51,14 @@ fits on the grid
 -   `position` **Object** 
 
 Returns **boolean** valid
+
+# getRandomInt
+
+Gets a random int between min and max
+
+**Parameters**
+
+-   `min` **number** 
+-   `max` **number** 
+
+Returns **number** 
