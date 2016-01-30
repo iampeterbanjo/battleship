@@ -1,10 +1,7 @@
-# Coordinates
+# board
 
-Coordinates to access grid point x and y
-
-**Parameters**
-
--   `args`  
+board is an array of [y][x] coordinates
+because rows will be drawn first
 
 # getPosition
 
@@ -71,6 +68,59 @@ Gets a random int between min and max
 
 Returns **number** 
 
+# computer
+
+Computer player can guess
+
+Returns **Player** 
+
+# Coordinates
+
+Coordinates to access grid point x and y
+
+**Parameters**
+
+-   `args` **Object** 
+    -   `args.random` **boolean** 
+    -   `args.x` **number** 
+    -   `args.y` **number** 
+
+# createBattleship
+
+Creates Battleships
+
+Returns **Ship** battleship
+
+# createDestroyer
+
+Creates Destroyers
+
+Returns **Ship** destroyer
+
+# damage
+
+# destroyed
+
+# getShips
+
+Returns **Ships** this.ships
+
+# guess
+
+Returns **Coordinates** 
+
+# human
+
+Returns **Player** 
+
+# init
+
+# Player
+
+A Player has 1 Battleshp and 2 Destroyers
+
+# position
+
 # Position
 
 Position Class to place ships with orientation
@@ -80,6 +130,30 @@ i.e. Coordinates with vertical property
 
 -   `args`  
 
+# Ship
+
+Ship
+
+**Parameters**
+
+-   `args` **Object** 
+    -   `args.type` **string** 
+    -   `args.size` **number** 
+
+# ShipFactory
+
+Ship Factory
+
+**Parameters**
+
+-   `type` **string** destroyer or battleship
+
+Returns **Ship** 
+
+# ships
+
+# size
+
 # translate
 
 Gets user input in form of [a-j][d] e.g. 'A5'
@@ -87,9 +161,11 @@ and translates it to grid coordinates
 
 **Parameters**
 
--   `input`  
+-   `input` **string** 
 
 Returns **Object** result {x, y}
+
+# type
 
 # vertical
 

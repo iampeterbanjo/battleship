@@ -85,8 +85,11 @@ var Game = Game || function() {
 		}
 	}
 
-	// board is an array of [y][x] coordinates
-	// because rows will be drawn first
+	/**
+	 * board is an array of [y][x] coordinates
+	 * because rows will be drawn first
+	 * @prop
+	 */
 	self.board = new Array(self.grid.height).fill(new Array(self.grid.width).fill(false));
 
 	/**
@@ -107,7 +110,7 @@ var Game = Game || function() {
 	/**
 	 * Gets user input in form of [a-j][d] e.g. 'A5'
 	 * and translates it to grid coordinates
-	 * @params {String} input
+	 * @param {string} input
 	 * @returns {Object} result {x, y}
 	 */
 	function translate(input) {
@@ -137,23 +140,41 @@ var Game = Game || function() {
 		return coordinates;
 	}
 
-	// SHIPS //
+	/**
+	 * Ship
+	 * @class
+	 * @param {Object} args
+	 * @param {string} args.type
+	 * @param {number} args.size
+	*/
 	function Ship(args) {
+		/** @member {string} */
 		this.type = args.type;
+		/** @member {number} */
 		this.size = args.size;
+		/** @member {number} */
 		this.position = 0;
+		/** @member {boolean} */
 		this.destroyed = false;
+		/** @member {Array} */
 		this.damage = [];
 	}
 
+	/** @private */
 	function Destroyer(){
 		return new Ship({size: 4, type: 'destroyer'});
 	}
 
+	/** @private */
 	function Battleship() {
 		return new Ship({size: 5, type: 'battleship'});
 	}
 
+	/**
+	 * Ship Factory
+	 * @param {string} type - destroyer or battleship
+	 * @returns {Ship}
+	*/
 	var ShipFactory = function(type) {
 		switch(type) {
 			case 'destroyer':
@@ -169,10 +190,18 @@ var Game = Game || function() {
 		return this.ShipType();
 	}
 
+	/**
+	 * Creates Battleships
+	 * @returns {Ship} battleship
+	*/
 	function createBattleship() {
 		return ShipFactory('battleship');
 	}
 
+	/**
+	 * Creates Destroyers
+	 * @returns {Ship} destroyer
+	*/
 	function createDestroyer() {
 		return ShipFactory('destroyer');
 	}
@@ -180,10 +209,10 @@ var Game = Game || function() {
 	/**
 	 * Coordinates to access grid point x and y
 	 * @class
-	 * @params {Object} args
-	 * @params {boolean} args.random
-	 * @params {number} args.x
-	 * @params {number} args.y
+	 * @param {Object} args
+	 * @param {boolean} args.random
+	 * @param {number} args.x
+	 * @param {number} args.y
 	 */
 	function Coordinates(args) {
 		var options = args || {
@@ -218,10 +247,14 @@ var Game = Game || function() {
 		this.vertical = !!options.random ? !!self.getRandomInt(0,1) : !!options.vertical
 	}
 
-	// PLAYERS //
+	/**
+	 * A Player has 1 Battleshp and 2 Destroyers
+	*/
 	function Player() {
 		// fill the array or else map wont work
+		/** @member {Ships[]} */
 		this.ships = new Array(3).fill(0);
+		/** @constructor */
 		this.init = function() {
 			var position = new Position({random: true});
 
@@ -236,22 +269,33 @@ var Game = Game || function() {
 				return ship;
 			});
 		}
+		/**
+		 * @returns {Ships} this.ships
+		 */
 		this.getShips = function() {
 			return this.ships;
 		}
 	}
 
 	return {
+		/**
+		 * @returns {Player}
+		*/
 		human: function() {
 			var player = new Player();
 			player.init();
 
 			return player;
 		}
+		/**
+		 * Computer player can guess
+		 * @returns {Player}
+		*/
 		, computer: function() {
 			var player = new Player();
 			player.init();
 
+			/** @returns {Coordinates} */
 			player.guess = function() {
 				return new Coordinates({random: true});
 			}
