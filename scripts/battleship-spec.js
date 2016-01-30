@@ -131,6 +131,13 @@ describe('Battleships', function() {
 			});
 		});
 
+		it('should error for invalid positions', function() {
+			var destroyer = game.createDestroyer();
+			expect(function() { grid.setPosition(destroyer, {x: 6, y: 0, vertical: false}) }).toThrow(new Error('invalid position'));
+			expect(function() { grid.setPosition(destroyer, {x: 6, y: -1, vertical: false}) }).toThrow(new Error('invalid position'));
+			expect(function() { grid.setPosition(destroyer, {x: 0, y: 6, vertical: true}) }).toThrow(new Error('invalid position'));
+		});
+
 		it('should be able to locate', function() {
 			expect(grid.locate).toBeDefined();
 		});
