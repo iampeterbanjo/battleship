@@ -176,12 +176,17 @@ describe('Battleships', function() {
 			expect(ships[0].position).not.toEqual(ships[1].position);
 		});
 
-		it('translates player input', function() {
-			expect(game.translate('A5')).toEqual({x: 0, y: 5});
-			expect(game.translate('j2')).toEqual({x: 9, y: 2});
-			expect(function() { game.translate('x5') }).toThrow(new Error('invalid input'));
-			expect(function() { game.translate('a15') }).toThrow(new Error('invalid input'));
-			expect(function() { game.translate('a15') }).toThrow(new Error('invalid input'));
+		it('maps player input', function() {
+			expect(game.mapInput('A5')).toEqual({x: 0, y: 5});
+			expect(game.mapInput('j2')).toEqual({x: 9, y: 2});
+			expect(function() { game.mapInput('x5') }).toThrow(new Error('invalid input'));
+			expect(function() { game.mapInput('a15') }).toThrow(new Error('invalid input'));
+			expect(function() { game.mapInput('a15') }).toThrow(new Error('invalid input'));
+		});
+
+		it('maps coordinates', function() {
+			expect(game.mapCoordinates({x: 0, y: 4})).toEqual('A4');
+			expect(function() { game.mapCoordinates({x: 1, y: 14}) }).toThrow(new Error('invalid coordinates'));
 		});
 
 		it('should destroy completely damaged ships', function() {

@@ -115,6 +115,30 @@ Returns **Player**
 
 # isDestroyed
 
+# mapCoordinates
+
+Gets coordinates and maps them to user input e.g.
+{x: 0, y: 4} becomes 'A5'
+
+**Parameters**
+
+-   `coordinates` **Object** 
+    -   `coordinates.x` **number** 
+    -   `coordinates.y` **number** 
+
+Returns **string** 
+
+# mapInput
+
+Gets user input in form of [a-j][d] e.g. 'A5'
+and maps it to grid coordinates
+
+**Parameters**
+
+-   `input` **string** 
+
+Returns **Object** result {x, y}
+
 # Player
 
 A Player has 1 Battleshp and 2 Destroyers
@@ -153,17 +177,6 @@ Returns **Ship**
 # ships
 
 # size
-
-# translate
-
-Gets user input in form of [a-j][d] e.g. 'A5'
-and translates it to grid coordinates
-
-**Parameters**
-
--   `input` **string** 
-
-Returns **Object** result {x, y}
 
 # type
 

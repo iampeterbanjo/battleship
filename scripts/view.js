@@ -39,6 +39,7 @@
 					checkbox.type = 'checkbox';
 					checkbox.setAttribute('data-x', w);
 					checkbox.setAttribute('data-y', h);
+					checkbox.setAttribute('data-coords', game.mapCoordinates({x: w, y: h}));
 
 					td.appendChild(checkbox);
 					tr.appendChild(td);
@@ -47,7 +48,7 @@
 				fragment.appendChild(tr);
 			}
 
-			$$('.grid').appendChild(fragment);
+			this.grid.appendChild(fragment);
 		}
 	};
 
