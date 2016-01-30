@@ -177,16 +177,53 @@ var Game = Game || function() {
 		return ShipFactory('destroyer');
 	}
 
+	/**
+	 * Coordinates to access grid point x and y
+	 * @class
+	 * @params {Object} args
+	 * @params {boolean} args.random
+	 * @params {number} args.x
+	 * @params {number} args.y
+	 */
+	function Coordinates(args) {
+		var options = args || {
+					random: false
+						, x: false
+						, y: false
+					};
+
+		/** @member {number} */
+		this.x = !!options.random ? self.getRandomInt(0,4) : (options.x || false);
+		/** @member {number} */
+		this.y = !!options.random ? self.getRandomInt(0,4) : (options.y || false);
+	}
+
+	/**
+	 * Position Class to place ships with orientation
+	 * i.e. Coordinates with vertical property
+	 * @class
+	 */
+	function Position(args) {
+		var options = args || {
+						random: false
+						, vertical: false
+					}
+				, coordinates = new Coordinates({random: options.random});
+
+		/** @member {number} */
+		this.x = coordinates.x;
+		/** @member {number} */
+		this.y = coordinates.y;
+		/** @member {boolean} */
+		this.vertical = !!options.random ? !!self.getRandomInt(0,1) : !!options.vertical
+	}
+
 	// PLAYERS //
 	function Player() {
 		// fill the array or else map wont work
 		this.ships = new Array(3).fill(0);
 		this.init = function() {
-			var position = {
-				x: self.getRandomInt(0,4)
-				, y: self.getRandomInt(0,4)
-				, vertical: !!self.getRandomInt(0,1)
-			}
+			var position = new Position({random: true});
 
 			this.ships = this.ships.map(function(ship, index) {
 				if(index === 0) {
@@ -215,14 +252,15 @@ var Game = Game || function() {
 			var player = new Player();
 			player.init();
 
+			player.guess = function() {
+				return new Coordinates({random: true});
+			}
+
 			return player;
 		}
 		, grid: self.grid
 		, createBattleship: createBattleship
 		, createDestroyer: createDestroyer
-		, start: function() {
-
-		}
 		, translate: translate
 	}
 }

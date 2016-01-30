@@ -1,3 +1,11 @@
+# Coordinates
+
+Coordinates to access grid point x and y
+
+**Parameters**
+
+-   `args`  
+
 # getPosition
 
 Gets a ship at a position if there is one
@@ -63,6 +71,15 @@ Gets a random int between min and max
 
 Returns **number** 
 
+# Position
+
+Position Class to place ships with orientation
+i.e. Coordinates with vertical property
+
+**Parameters**
+
+-   `args`  
+
 # translate
 
 Gets user input in form of [a-j][d] e.g. 'A5'
@@ -73,3 +90,13 @@ and translates it to grid coordinates
 -   `input`  
 
 Returns **Object** result {x, y}
+
+# vertical
+
+# x
+
+# x
+
+# y
+
+# y

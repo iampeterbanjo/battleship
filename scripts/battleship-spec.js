@@ -171,10 +171,6 @@ describe('Battleships', function() {
 			game = new Game();
 		});
 
-		it('should start', function() {
-			expect(game.start).toBeDefined();
-		});
-
 		it('should start with player\'s ships at random positions', function() {
 			var ships = game.computer().getShips();
 			expect(ships[0].position).not.toEqual(ships[1].position);
@@ -187,5 +183,20 @@ describe('Battleships', function() {
 			expect(function() { game.translate('a15') }).toThrow(new Error('invalid input'));
 			expect(function() { game.translate('a15') }).toThrow(new Error('invalid input'));
 		});
-	});
+	}); // the Rules
+
+	describe('the Computer', function() {
+		it('can guess a ship\'s coordinates', function() {
+			expect(game.computer().guess).toBeDefined();
+		});
+
+		it('guesses a ship\'s coordinates', function() {
+			var coordinates = game.computer().guess();
+
+			expect(coordinates.x >= 0).toBe(true);
+			expect(coordinates.x <= 9).toBe(true);
+			expect(coordinates.y >= 0).toBe(true);
+			expect(coordinates.y <= 9).toBe(true);
+		});
+	}); // the Computer
 });
