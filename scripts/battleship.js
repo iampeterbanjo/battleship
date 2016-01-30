@@ -43,7 +43,7 @@ var Game = Game || function() {
 					type: ship.type
 					, start: position.y
 					, end: position.vertical ? position.y + ship.size : position.x + ship.size
-					, _: ship
+					, damage: ship.damage
 				}
 
 				for (var index = 0; index < ship.size; index++) {
@@ -77,9 +77,8 @@ var Game = Game || function() {
 		 */
 		, target: function(coordinates) {
 			var ship = this.locate(coordinates);
-console.log(ship);
 			if(ship) {
-				ship._.damage.push(coordinates);
+				ship.damage.push(coordinates);
 			}
 
 			return !!ship;

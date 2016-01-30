@@ -127,6 +127,7 @@ describe('Battleships', function() {
 				start: position.y
 				, end: position.x + battleship.size
 				, type: battleship.type
+				, damage: []
 			});
 		});
 
@@ -152,7 +153,8 @@ describe('Battleships', function() {
 			grid.setPosition(destroyer, position);
 
 			expect(grid.target(coordinates)).toBe(true);
-			expect(destroyer.damage).toEqual([coordinates]);
+			expect(destroyer.damage.length).toBe(1);
+			expect(destroyer.damage[0]).toEqual(coordinates);
 		});
 	}); // the Grid
 });
