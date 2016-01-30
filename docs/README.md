@@ -99,8 +99,6 @@ Returns **Ship** destroyer
 
 # damage
 
-# destroyed
-
 # getShips
 
 Returns **Ships** this.ships
@@ -114,6 +112,8 @@ Returns **Coordinates**
 Returns **Player** 
 
 # init
+
+# isDestroyed
 
 # Player
 

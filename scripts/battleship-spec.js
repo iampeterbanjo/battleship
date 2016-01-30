@@ -94,7 +94,7 @@ describe('Battleships', function() {
 		});
 
 		it('should not be destroyed', function() {
-			expect(battleship.destroyed).toBe(false);
+			expect(battleship.isDestroyed()).toBe(false);
 		});
 
 		it('should not be damaged', function() {
@@ -182,6 +182,16 @@ describe('Battleships', function() {
 			expect(function() { game.translate('x5') }).toThrow(new Error('invalid input'));
 			expect(function() { game.translate('a15') }).toThrow(new Error('invalid input'));
 			expect(function() { game.translate('a15') }).toThrow(new Error('invalid input'));
+		});
+
+		it('should destroy completely damaged ships', function() {
+			var destroyer = game.createDestroyer();
+
+			game.grid.setPosition(destroyer, {x: 0, y: 0, vertical: false});
+			for (var index = 0; index < destroyer.size; index++) {
+				game.grid.target({x: index, y: 0});
+			}
+			expect(destroyer.isDestroyed()).toBe(true);
 		});
 	}); // the Rules
 

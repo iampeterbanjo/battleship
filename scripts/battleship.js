@@ -154,10 +154,12 @@ var Game = Game || function() {
 		this.size = args.size;
 		/** @member {number} */
 		this.position = 0;
-		/** @member {boolean} */
-		this.destroyed = false;
 		/** @member {Array} */
 		this.damage = [];
+		/** @member {boolean} */
+		this.isDestroyed = function(){
+			return this.size === this.damage.length;
+		}
 	}
 
 	/** @private */
