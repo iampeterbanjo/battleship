@@ -62,3 +62,14 @@ Gets a random int between min and max
 -   `max` **number** 
 
 Returns **number** 
+
+# translate
+
+Gets user input in form of [a-j][d] e.g. 'A5'
+and translates it to grid coordinates
+
+**Parameters**
+
+-   `input`  
+
+Returns **Object** result {x, y}

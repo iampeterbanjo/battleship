@@ -104,6 +104,39 @@ var Game = Game || function() {
 		return Math.floor(min + Math.random() * (max - min));
 	}
 
+	/**
+	 * Gets user input in form of [a-j][d] e.g. 'A5'
+	 * and translates it to grid coordinates
+	 * @params {String} input
+	 * @returns {Object} result {x, y}
+	 */
+	function translate(input) {
+		var letter = input.toLowerCase()[0]
+				, number = input.slice(1) * 1
+				, coordinates = {}
+				, chronometer = {
+					'a': 0
+					, 'b': 1
+					, 'c': 2
+					, 'd': 3
+					, 'e': 4
+					, 'f': 5
+					, 'g': 6
+					, 'h': 7
+					, 'i': 8
+					, 'j': 9
+				};
+
+		if(/[a-j]/.exec(letter) && number > 0 && number <= 10) {
+			coordinates.x = chronometer[letter];
+			coordinates.y = number;
+		} else {
+			throw new Error('invalid input');
+		}
+
+		return coordinates;
+	}
+
 	// SHIPS //
 	function Ship(args) {
 		this.type = args.type;
@@ -190,5 +223,6 @@ var Game = Game || function() {
 		, start: function() {
 
 		}
+		, translate: translate
 	}
 }

@@ -179,5 +179,13 @@ describe('Battleships', function() {
 			var ships = game.computer().getShips();
 			expect(ships[0].position).not.toEqual(ships[1].position);
 		});
+
+		it('translates player input', function() {
+			expect(game.translate('A5')).toEqual({x: 0, y: 5});
+			expect(game.translate('j2')).toEqual({x: 9, y: 2});
+			expect(function() { game.translate('x5') }).toThrow(new Error('invalid input'));
+			expect(function() { game.translate('a15') }).toThrow(new Error('invalid input'));
+			expect(function() { game.translate('a15') }).toThrow(new Error('invalid input'));
+		});
 	});
 });
