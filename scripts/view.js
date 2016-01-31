@@ -27,21 +27,23 @@
 		*/
 		draw: function() {
 			var fragment = document.createDocumentFragment()
-					, tr, td, checkbox;
+					, tr, td, checkbox, span;
 
 			for (var h = 0; h < game.grid.height; h++) {
 				tr = element('tr');
 
 				for (var w = 0; w < game.grid.width; w++) {
 					td = element('td');
+					td.setAttribute('data-coords', game.mapCoordinates({x: w, y: h}));
 
 					checkbox = element('input');
 					checkbox.type = 'checkbox';
 					checkbox.setAttribute('data-x', w);
 					checkbox.setAttribute('data-y', h);
-					checkbox.setAttribute('data-coords', game.mapCoordinates({x: w, y: h}));
 
+					span = element('span');
 					td.appendChild(checkbox);
+					td.appendChild(span);
 					tr.appendChild(td);
 				}
 
