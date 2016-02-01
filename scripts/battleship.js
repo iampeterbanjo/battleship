@@ -49,10 +49,12 @@ var Game = Game || function() {
 
 				for (var index = 0; index < ship.size; index++) {
 					if(position.vertical) {
-						pos.coordinates.push({y: [position.y + index], x: [position.x]});
+						pos.coordinates
+						.push({x: position.x, y: position.y + index});
 						self.board[position.y + index][position.x] = pos;
 					} else {
-						pos.coordinates.push({y: [position.y], x: [position.x + index]});
+						pos.coordinates
+						.push({x: position.x + index, y: position.y});
 						self.board[position.y][position.x + index] = pos;
 					}
 				}

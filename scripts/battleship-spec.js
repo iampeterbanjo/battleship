@@ -123,12 +123,10 @@ describe('Battleships', function() {
 
 			grid.setPosition(battleship, position);
 
-			expect(battleship.position).toEqual({
-				start: position.y
-				, end: position.x + battleship.size
-				, type: battleship.type
-				, damage: []
-			});
+			expect(battleship.position.end).toEqual(position.x + battleship.size);
+			expect(battleship.position.start).toEqual(position.y);
+			expect(battleship.position.coordinates[0])
+			.toEqual({x: position.x, y: position.y});
 		});
 
 		it('should error for invalid positions', function() {
