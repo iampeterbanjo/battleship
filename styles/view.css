@@ -18,6 +18,13 @@ td {
 	position: relative;
 }
 
+tr:nth-child(2n+1) td:after {
+	content: '';
+	background: #ededed;
+	z-index: -3;
+}
+
+tr:nth-child(2n+1) td:after,
 td input:checked + span,
 td:before {
 	position: absolute;

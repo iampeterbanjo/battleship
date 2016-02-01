@@ -18,14 +18,18 @@
 	}
 
 	function GameView() {
-		this.grid = $$('.grid')
+		this.gridElement = $$('.grid')
 	}
 
+
 	GameView.prototype = {
+		/* @constructor */
+		init: function() {
+		}
 		/**
 		 * Draw the Game grid as a table
 		*/
-		draw: function() {
+		, drawGrid: function() {
 			var fragment = document.createDocumentFragment()
 					, tr, td, checkbox, span;
 
@@ -50,14 +54,31 @@
 				fragment.appendChild(tr);
 			}
 
-			this.grid.appendChild(fragment);
+			this.gridElement.appendChild(fragment);
+		}
+		, drawPlayerShips: function(ships, view) {
+				var coords, pos, ship;
+
+				for (var index = 0; index < ships.length; index++) {
+					ship = ships[index];
+					coords = ship.position.coordinates;
+					coords.map(function(item, index) {
+						pos = game.mapCoordinates(item);
+						$$('[data-coords="' + pos + '"]').classList.add(ship.type);
+					});
+				}
 		}
 	};
 
 	document.addEventListener('DOMContentLoaded', function() {
-		console.log('ready');
+		var gameView = new GameView()
+				, human = game.human()
+				, computer = game.computer()
+				, humanShips = human.getShips()
+				, computerShips = computer.getShips();
 
-		var gameView = new GameView();
-		gameView.draw();
+		gameView.drawGrid();
+
+		gameView.drawPlayerShips(humanShips);
 	});
 })(new Game());

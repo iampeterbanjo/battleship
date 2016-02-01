@@ -44,12 +44,15 @@ var Game = Game || function() {
 					, start: position.y
 					, end: position.vertical ? position.y + ship.size : position.x + ship.size
 					, damage: ship.damage
+					, coordinates: []
 				}
 
 				for (var index = 0; index < ship.size; index++) {
 					if(position.vertical) {
+						pos.coordinates.push({y: [position.y + index], x: [position.x]});
 						self.board[position.y + index][position.x] = pos;
 					} else {
+						pos.coordinates.push({y: [position.y], x: [position.x + index]});
 						self.board[position.y][position.x + index] = pos;
 					}
 				}
