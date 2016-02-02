@@ -292,6 +292,10 @@ var Game = Game || function() {
 						, x: false
 						, y: false
 					};
+		/** @todo: increase range of random int to spread
+		 * ships out on the board e.g. if vertical 10 < x > -1
+		 * else 10 < y > -1
+		*/
 
 		/** @member {number} */
 		this.x = !!options.random ? self.getRandomInt(0,4) : (options.x || false);

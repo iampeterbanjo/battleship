@@ -101,5 +101,6 @@
 		gameView.init();
 
 		gameView.drawPlayerShips(humanShips);
+		gameView.drawPlayerShips(computerShips);
 	});
 })(new Game());
