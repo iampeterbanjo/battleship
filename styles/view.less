@@ -53,8 +53,14 @@ td input {
 	}
 }
 
+@text-small: 0.6em;
+
 .ship-text {
-	display: block;
+	font-size: @text-small;
+	line-height: @text-small * 2;
+	position: absolute;
+	top: 0;
+	left: 0;
 	text-align: center;
 }
 
@@ -121,5 +127,5 @@ header {
 
 .boom + span {
 	background-color: red;
-	animation: boom 1s;
+	animation: boom 1s ease-in-out;
 }

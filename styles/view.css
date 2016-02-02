@@ -46,7 +46,11 @@ td input input:checked + span {
   z-index: -2;
 }
 .ship-text {
-  display: block;
+  font-size: 0.6em;
+  line-height: 1.2em;
+  position: absolute;
+  top: 0;
+  left: 0;
   text-align: center;
 }
 td.destroyer {
@@ -54,7 +58,11 @@ td.destroyer {
 }
 td.destroyer span:before {
   content: "D";
-  display: block;
+  font-size: 0.6em;
+  line-height: 1.2em;
+  position: absolute;
+  top: 0;
+  left: 0;
   text-align: center;
 }
 td.battleship {
@@ -62,7 +70,11 @@ td.battleship {
 }
 td.battleship span:before {
   content: "B";
-  display: block;
+  font-size: 0.6em;
+  line-height: 1.2em;
+  position: absolute;
+  top: 0;
+  left: 0;
   text-align: center;
 }
 .container {
@@ -108,5 +120,5 @@ header {
 }
 .boom + span {
   background-color: red;
-  animation: boom 1s;
+  animation: boom 1s ease-in-out;
 }
