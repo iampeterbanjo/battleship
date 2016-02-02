@@ -40,10 +40,16 @@ td input {
   height: 100%;
   opacity: 0;
 }
-td input:checked + span {
+td input input:checked + span {
   background: yellow;
   display: inline-block;
   z-index: -2;
+}
+td.destroyer {
+  border: 1px red solid;
+}
+td.battleship {
+  border: 1px blue solid;
 }
 .container {
   margin: 0 auto;
