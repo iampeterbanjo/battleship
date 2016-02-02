@@ -45,11 +45,25 @@ td input input:checked + span {
   display: inline-block;
   z-index: -2;
 }
+.ship-text {
+  display: block;
+  text-align: center;
+}
 td.destroyer {
   border: 1px red solid;
 }
+td.destroyer span:before {
+  content: "D";
+  display: block;
+  text-align: center;
+}
 td.battleship {
   border: 1px blue solid;
+}
+td.battleship span:before {
+  content: "B";
+  display: block;
+  text-align: center;
 }
 .container {
   margin: 0 auto;
@@ -77,4 +91,22 @@ header {
   .main {
     width: 33em;
   }
+}
+@keyframes boom {
+  0% {
+    background: white;
+  }
+  25% {
+    background: red;
+  }
+  50% {
+    background: yellow;
+  }
+  100% {
+    background: red;
+  }
+}
+.boom + span {
+  background-color: red;
+  animation: boom 1s;
 }

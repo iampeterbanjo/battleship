@@ -18,13 +18,16 @@
 	}
 
 	function GameView() {
-		this.gridElement = $$('.grid')
+		this.gridElement = $$('.grid');
+		this.playersTurn = true;
 	}
 
 
 	GameView.prototype = {
 		/* @constructor */
 		init: function() {
+			this.watchTargeting();
+			this.drawGrid();
 		}
 		/**
 		 * Draw the Game grid as a table
@@ -57,17 +60,34 @@
 			this.gridElement.appendChild(fragment);
 		}
 		, drawPlayerShips: function(ships, view) {
-				var coords, pos, ship;
+			var coords, pos, ship;
 
-				for (var index = 0; index < ships.length; index++) {
-					ship = ships[index];
-					coords = ship.position.coordinates;
+			for (var index = 0; index < ships.length; index++) {
+				ship = ships[index];
+				coords = ship.position.coordinates;
 
-					coords.map(function(item, index) {
-						pos = game.mapCoordinates(item);
-						$$('[data-coords="' + pos + '"]').classList.add(ship.type);
-					});
+				coords.map(function(item, index) {
+					pos = game.mapCoordinates(item);
+					$$('[data-coords="' + pos + '"]').classList.add(ship.type);
+				});
+			}
+		}
+		, watchTargeting: function() {
+			this.gridElement.addEventListener('click', function(event) {
+				// if(!this.playerTurn) {
+				// 	return;
+				// }
+
+				var input = event.target
+						, x = input.getAttribute('data-x') * 1
+						, y = input.getAttribute('data-y') * 1
+						, coordinates = {x: x, y: y};
+
+				if(game.grid.target(coordinates)) {
+					// alert('boom!');
+					input.classList.add('boom');
 				}
+			})
 		}
 	};
 
@@ -78,7 +98,7 @@
 				, humanShips = human.getShips()
 				, computerShips = computer.getShips();
 
-		gameView.drawGrid();
+		gameView.init();
 
 		gameView.drawPlayerShips(humanShips);
 	});

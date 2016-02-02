@@ -53,12 +53,27 @@ td input {
 	}
 }
 
+.ship-text {
+	display: block;
+	text-align: center;
+}
+
 td.destroyer {
 	border: 1px red solid;
+
+	span:before {
+		content: "D";
+		.ship-text;
+	}
 }
 
 td.battleship {
 	border: 1px blue solid;
+
+	span:before {
+		content: "B";
+		.ship-text;
+	}
 }
 
 .container {
@@ -91,4 +106,20 @@ header {
 	.main {
 		width: 33em;
 	}
+}
+
+//
+// animations
+//
+
+@keyframes boom {
+	0% { background: white;}
+	25% { background: red; }
+	50% { background: yellow; }
+	100% { background: red; }
+}
+
+.boom + span {
+	background-color: red;
+	animation: boom 1s;
 }
