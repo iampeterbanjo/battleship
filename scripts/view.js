@@ -62,6 +62,7 @@
 				for (var index = 0; index < ships.length; index++) {
 					ship = ships[index];
 					coords = ship.position.coordinates;
+
 					coords.map(function(item, index) {
 						pos = game.mapCoordinates(item);
 						$$('[data-coords="' + pos + '"]').classList.add(ship.type);

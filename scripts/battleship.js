@@ -328,9 +328,9 @@ var Game = Game || function() {
 		this.ships = new Array(3).fill(0);
 		/** @constructor */
 		this.init = function() {
-			var position = new Position({random: true});
-
 			this.ships = this.ships.map(function(ship, index) {
+				var position = new Position({random: true});
+
 				if(index === 0) {
 					ship = createBattleship();
 				} else {

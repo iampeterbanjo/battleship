@@ -7,10 +7,13 @@
     "test": "testem",
     "proxy": "browser-sync start --proxy localhost:7357 --xip --no-open --port 4000",
     "docs": "documentation scripts/battleship.js --format md --shallow --output docs/README.md",
-    "install": "npm install -g documentation parallelshell browser-sync chokidar-cli",
-    "dev": "parallelshell 'testem' 'npm run proxy' 'npm run watch:files'",
+    "install": "npm install -g documentation parallelshell browser-sync chokidar-cli less",
+    "dev": "parallelshell 'testem' 'npm run proxy' 'npm run watch'",
+    "watch": "parallelshell 'npm run watch:files' 'npm run watch:less'",
     "watch:files": "chokidar '**/*.js' -c 'npm run build'",
-    "build": "parallelshell 'npm run docs'"
+    "watch:less": "chokidar '**/*.less' -c 'npm run build:less'",
+    "build": "parallelshell 'npm run docs'",
+    "build:less": "lessc ./styles/view.less > ./styles/view.css"
   },
   "repository": {
     "type": "git",
