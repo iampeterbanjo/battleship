@@ -1,18 +1,11 @@
-# board
+# createTwoDimensionalArray
 
-board is an array of [y][x] coordinates
-because rows will be drawn first
+Creates a two dimensional array for the board
+using this height and width
+
+Returns **Array** twoDimensions
 
 # getPosition
-
-Gets a ship at a position if there is one
-
-**Parameters**
-
--   `y` **number** 
--   `x` **number** 
-
-# locate
 
 Find a ship on the board given the coordinates
 
@@ -21,6 +14,8 @@ Find a ship on the board given the coordinates
 -   `coordinates` **Object** 
     -   `coordinates.x` **number** 
     -   `coordinates.y` **number** 
+
+# init
 
 # setPosition
 

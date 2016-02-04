@@ -1,4 +1,6 @@
-(function(game) {
+(function() {
+	var game = new Game();
+	game.grid.init();
 	/**
 	 * Shorthand for document.querySelector
 	 * @params {string} selector (css)
@@ -102,5 +104,7 @@
 
 		gameView.drawPlayerShips(humanShips);
 		gameView.drawPlayerShips(computerShips);
+		gameView.watchTargeting();
+
 	});
-})(new Game());
+})();
