@@ -81,11 +81,11 @@
 				// }
 
 				var input = event.target
-						, x = input.getAttribute('data-x') * 1
-						, y = input.getAttribute('data-y') * 1
+						, x = parseInt(input.getAttribute('data-x'), 10)
+						, y = parseInt(input.getAttribute('data-y'), 10)
 						, coordinates = {x: x, y: y};
 
-				if(game.grid.target(coordinates)) {
+				if(x && y && game.grid.target(coordinates)) {
 					// alert('boom!');
 					input.classList.add('boom');
 				}
