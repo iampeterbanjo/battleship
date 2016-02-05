@@ -20,7 +20,7 @@ var Game = Game || function() {
 		}
 		/** @constructor */
 		, init: function() {
-			self.board = this.createTwoDimensionalArray();
+			this.board = this.createTwoDimensionalArray();
 		}
 		/**
 		 * Checks if the proposed location for a ship
@@ -69,7 +69,7 @@ var Game = Game || function() {
 					}
 
 					pos.coordinates.push({x: newX, y: newY});
-					self.board[newY][newX] = pos;
+					this.board[newY][newX] = pos;
 				}
 
 				ship.position = pos;
@@ -84,7 +84,7 @@ var Game = Game || function() {
 		 * @param {number} coordinates.y
 		 */
 		, getPosition: function(coordinates) {
-			return self.board[coordinates.y][coordinates.x];
+			return this.board[coordinates.y][coordinates.x];
 		}
 		/**
 		 * Targets a position on the grid and damages any
@@ -388,6 +388,5 @@ var Game = Game || function() {
 		, createBattleship: createBattleship
 		, createDestroyer: createDestroyer
 		, mapInput: mapInput
-		, board: self.board
 	}
 }
