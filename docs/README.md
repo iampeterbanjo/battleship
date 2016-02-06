@@ -1,18 +1,11 @@
-# board
+# createTwoDimensionalArray
 
-board is an array of [y][x] coordinates
-because rows will be drawn first
+Creates a two dimensional array for the board
+using this height and width
+
+Returns **Array** twoDimensions
 
 # getPosition
-
-Gets a ship at a position if there is one
-
-**Parameters**
-
--   `y` **number** 
--   `x` **number** 
-
-# locate
 
 Find a ship on the board given the coordinates
 
@@ -21,6 +14,8 @@ Find a ship on the board given the coordinates
 -   `coordinates` **Object** 
     -   `coordinates.x` **number** 
     -   `coordinates.y` **number** 
+
+# init
 
 # setPosition
 
@@ -115,6 +110,30 @@ Returns **Player**
 
 # isDestroyed
 
+# mapCoordinates
+
+Gets coordinates and maps them to user input e.g.
+{x: 0, y: 4} becomes 'A5'
+
+**Parameters**
+
+-   `coordinates` **Object** 
+    -   `coordinates.x` **number** 
+    -   `coordinates.y` **number** 
+
+Returns **string** 
+
+# mapInput
+
+Gets user input in form of [a-j][d] e.g. 'A5'
+and maps it to grid coordinates
+
+**Parameters**
+
+-   `input` **string** 
+
+Returns **Object** result {x, y}
+
 # Player
 
 A Player has 1 Battleshp and 2 Destroyers
@@ -154,20 +173,11 @@ Returns **Ship**
 
 # size
 
-# translate
-
-Gets user input in form of [a-j][d] e.g. 'A5'
-and translates it to grid coordinates
-
-**Parameters**
-
--   `input` **string** 
-
-Returns **Object** result {x, y}
-
 # type
 
 # vertical
+
+# x
 
 # x
 

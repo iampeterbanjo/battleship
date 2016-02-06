@@ -4,6 +4,24 @@ var Game = Game || function() {
 	self.grid = {
 		width: 10
 		, height: 10
+		, board: []
+		/**
+		 * Creates a two dimensional array for the board
+		 * using this height and width
+		 * @returns {Array} twoDimensions
+		*/
+		, createTwoDimensionalArray: function() {
+			var twoDimensions = new Array(this.height);
+			for (var y = 0; y < this.height; y++) {
+				twoDimensions[y] = new Array(this.width).fill(false);
+			}
+
+			return twoDimensions;
+		}
+		/** @constructor */
+		, init: function() {
+			this.board = this.createTwoDimensionalArray();
+		}
 		/**
 		 * Checks if the proposed location for a ship
 		 * fits on the grid
@@ -21,14 +39,7 @@ var Game = Game || function() {
 
 			return valid;
 		}
-		/**
-		 * Gets a ship at a position if there is one
-		 * @param {number} y
-		 * @param {number} x
-		 */
-		, getPosition: function(y, x) {
-			return self.board[y][x]
-		}
+
 		/**
 		 * Sets a ship at a position
 		 * @param {Ship} ship
@@ -40,18 +51,25 @@ var Game = Game || function() {
 		, setPosition: function(ship, position) {
 			if(this.validPosition(ship, position)) {
 				var pos = {
-					type: ship.type
-					, start: position.y
-					, end: position.vertical ? position.y + ship.size : position.x + ship.size
-					, damage: ship.damage
-				}
+							type: ship.type
+							, start: position.y
+							, end: position.vertical ? position.y + ship.size : position.x + ship.size
+							, damage: ship.damage
+							, coordinates: []
+						}
+						, newX, newY;
 
 				for (var index = 0; index < ship.size; index++) {
 					if(position.vertical) {
-						self.board[position.y + index][position.x] = pos;
+						newX = position.x;
+						newY = position.y + index;
 					} else {
-						self.board[position.y][position.x + index] = pos;
+						newX = position.x + index;
+						newY = position.y;
 					}
+
+					pos.coordinates.push({x: newX, y: newY});
+					this.board[newY][newX] = pos;
 				}
 
 				ship.position = pos;
@@ -65,8 +83,8 @@ var Game = Game || function() {
 		 * @param {number} coordinates.x
 		 * @param {number} coordinates.y
 		 */
-		, locate: function(coordinates) {
-			return self.board[coordinates.y][coordinates.x];
+		, getPosition: function(coordinates) {
+			return this.board[coordinates.y][coordinates.x];
 		}
 		/**
 		 * Targets a position on the grid and damages any
@@ -76,7 +94,7 @@ var Game = Game || function() {
 		 * @param {number} coordinates.y
 		 */
 		, target: function(coordinates) {
-			var ship = this.locate(coordinates);
+			var ship = this.getPosition(coordinates);
 			if(ship) {
 				ship.damage.push(coordinates);
 			}
@@ -84,13 +102,6 @@ var Game = Game || function() {
 			return !!ship;
 		}
 	}
-
-	/**
-	 * board is an array of [y][x] coordinates
-	 * because rows will be drawn first
-	 * @prop
-	 */
-	self.board = new Array(self.grid.height).fill(new Array(self.grid.width).fill(false));
 
 	/**
 	 * Gets a random int between min and max
@@ -108,16 +119,15 @@ var Game = Game || function() {
 	}
 
 	/**
-	 * Gets user input in form of [a-j][d] e.g. 'A5'
-	 * and translates it to grid coordinates
-	 * @param {string} input
-	 * @returns {Object} result {x, y}
-	 */
-	function translate(input) {
-		var letter = input.toLowerCase()[0]
-				, number = input.slice(1) * 1
-				, coordinates = {}
-				, chronometer = {
+	 * Converts a string or number point
+	 * to string between A-J or number between 0 - 9
+	 * @private
+	 * @param {string|number} z
+	 * @returns {string|number} result
+	*/
+	self.chronometer = function(z){
+		var result
+				, stringMap = {
 					'a': 0
 					, 'b': 1
 					, 'c': 2
@@ -128,16 +138,82 @@ var Game = Game || function() {
 					, 'h': 7
 					, 'i': 8
 					, 'j': 9
+				}
+				, numberMap = {
+					0: 'a'
+					, 1: 'b'
+					, 2: 'c'
+					, 3: 'd'
+					, 4: 'e'
+					, 5: 'f'
+					, 6: 'g'
+					, 7: 'h'
+					, 8: 'i'
+					, 9: 'j'
 				};
 
-		if(/[a-j]/.exec(letter) && number > 0 && number <= 10) {
-			coordinates.x = chronometer[letter];
+		if(typeof z == 'string') {
+			result = stringMap[z];
+		} else {
+			result = numberMap[z];
+		}
+
+		return result;
+	}
+
+
+	/**
+	 * Checks a point is between the range
+	 * of the grid
+	 * @private
+	 * @param {number} point
+	 * @returns {boolean}
+	*/
+	function validPoint(point) {
+		return point >= 0 && point <= self.grid.width;
+	}
+
+	/**
+	 * Gets user input in form of [a-j][d] e.g. 'A5'
+	 * and maps it to grid coordinates
+	 * @param {string} input
+	 * @returns {Object} result {x, y}
+	 */
+	function mapInput(input) {
+		var letter = input.toLowerCase()[0]
+				, number = input.slice(1) * 1
+				, coordinates = {}
+
+		if(/[a-j]/.exec(letter) && validPoint(number)) {
+			coordinates.x = self.chronometer(letter);
 			coordinates.y = number;
 		} else {
 			throw new Error('invalid input');
 		}
 
 		return coordinates;
+	}
+
+	/**
+	 * Gets coordinates and maps them to user input e.g.
+	 * {x: 0, y: 4} becomes 'A5'
+	 * @param {Object} coordinates
+	 * @param {number} coordinates.x
+	 * @param {number} coordinates.y
+	 * @returns {string}
+	*/
+	function mapCoordinates(coordinates) {
+		var x = self.chronometer(coordinates.x)
+				, y = coordinates.y
+				, result;
+
+		if(x && validPoint(y)) {
+			result = x.toUpperCase() + y;
+		} else {
+			throw new Error('invalid coordinates');
+		}
+
+		return result;
 	}
 
 	/**
@@ -222,6 +298,10 @@ var Game = Game || function() {
 						, x: false
 						, y: false
 					};
+		/** @todo: increase range of random int to spread
+		 * ships out on the board e.g. if vertical 10 < x > -1
+		 * else 10 < y > -1
+		*/
 
 		/** @member {number} */
 		this.x = !!options.random ? self.getRandomInt(0,4) : (options.x || false);
@@ -258,9 +338,8 @@ var Game = Game || function() {
 		this.ships = new Array(3).fill(0);
 		/** @constructor */
 		this.init = function() {
-			var position = new Position({random: true});
-
 			this.ships = this.ships.map(function(ship, index) {
+				var position = new Position({random: true});
 				if(index === 0) {
 					ship = createBattleship();
 				} else {
@@ -305,8 +384,9 @@ var Game = Game || function() {
 			return player;
 		}
 		, grid: self.grid
+		, mapCoordinates: mapCoordinates
 		, createBattleship: createBattleship
 		, createDestroyer: createDestroyer
-		, translate: translate
+		, mapInput: mapInput
 	}
 }

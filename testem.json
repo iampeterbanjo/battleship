@@ -2,4 +2,5 @@
 	"src_files": [
 		"scripts/**/*.js"
 	]
+	, "src_files_ignore": "scripts/view.js"
 }

@@ -3,6 +3,7 @@ describe('Battleships', function() {
 
 	beforeEach(function() {
 		game = new Game();
+		game.grid.init();
 	});
 
 	describe('the Game', function() {
@@ -46,7 +47,8 @@ describe('Battleships', function() {
 		var human;
 
 		beforeEach(function() {
-			human = new Game().human();
+			game.grid.init();
+			human = game.human();
 		});
 
 		it('should have ships', function() {
@@ -108,6 +110,7 @@ describe('Battleships', function() {
 		beforeEach(function() {
 			game = new Game();
 			grid = game.grid;
+			grid.init();
 		});
 
 		it('should have a way to get/set a position on the grid', function() {
@@ -123,12 +126,10 @@ describe('Battleships', function() {
 
 			grid.setPosition(battleship, position);
 
-			expect(battleship.position).toEqual({
-				start: position.y
-				, end: position.x + battleship.size
-				, type: battleship.type
-				, damage: []
-			});
+			expect(battleship.position.end).toEqual(position.x + battleship.size);
+			expect(battleship.position.start).toEqual(position.y);
+			expect(battleship.position.coordinates[0])
+			.toEqual({x: position.x, y: position.y});
 		});
 
 		it('should error for invalid positions', function() {
@@ -138,18 +139,14 @@ describe('Battleships', function() {
 			expect(function() { grid.setPosition(destroyer, {x: 0, y: 6, vertical: true}) }).toThrow(new Error('invalid position'));
 		});
 
-		it('should be able to locate', function() {
-			expect(grid.locate).toBeDefined();
-		});
-
 		it('should locate a ship given a position', function() {
 			var destroyer = game.createDestroyer()
 					, position = {x: 2, y: 2, vertical: false};
 
 			grid.setPosition(destroyer, position);
 
-			expect(grid.locate({x: 0, y: 0})).toBe(false);
-			expect(grid.locate({x: position.x, y: position.y}).type).toBe('destroyer');
+			expect(grid.getPosition({x: 0, y: 0})).toBe(false);
+			expect(grid.getPosition({x: position.x, y: position.y}).type).toBe('destroyer');
 		});
 
 		it('should damage a targeted ship', function() {
@@ -169,6 +166,7 @@ describe('Battleships', function() {
 		var game;
 		beforeEach(function() {
 			game = new Game();
+			game.grid.init();
 		});
 
 		it('should start with player\'s ships at random positions', function() {
@@ -176,12 +174,17 @@ describe('Battleships', function() {
 			expect(ships[0].position).not.toEqual(ships[1].position);
 		});
 
-		it('translates player input', function() {
-			expect(game.translate('A5')).toEqual({x: 0, y: 5});
-			expect(game.translate('j2')).toEqual({x: 9, y: 2});
-			expect(function() { game.translate('x5') }).toThrow(new Error('invalid input'));
-			expect(function() { game.translate('a15') }).toThrow(new Error('invalid input'));
-			expect(function() { game.translate('a15') }).toThrow(new Error('invalid input'));
+		it('maps player input', function() {
+			expect(game.mapInput('A5')).toEqual({x: 0, y: 5});
+			expect(game.mapInput('j2')).toEqual({x: 9, y: 2});
+			expect(function() { game.mapInput('x5') }).toThrow(new Error('invalid input'));
+			expect(function() { game.mapInput('a15') }).toThrow(new Error('invalid input'));
+			expect(function() { game.mapInput('a15') }).toThrow(new Error('invalid input'));
+		});
+
+		it('maps coordinates', function() {
+			expect(game.mapCoordinates({x: 0, y: 4})).toEqual('A4');
+			expect(function() { game.mapCoordinates({x: 1, y: 14}) }).toThrow(new Error('invalid coordinates'));
 		});
 
 		it('should destroy completely damaged ships', function() {

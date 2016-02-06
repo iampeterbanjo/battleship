@@ -3,10 +3,23 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Battleship</title>
+	<link rel="stylesheet" href="styles/view.css">
 </head>
 <body>
-	<h1>Battleship</h1>
-	<script src="scripts/main.js"></script>
-	<script src="scripts/tests.js"></script>
+	<section class="container">
+		<header>
+			<h1>Battleship</h1>
+		</header>
+		<div class="sidebar">
+			<h2>Controls</h2>
+			<button>Show all ships</button>
+		</div>
+		<div class="main">
+			<table class="grid"></table>
+		</div>
+	</section>
+
+	<script src="scripts/battleship.js"></script>
+	<script src="scripts/view.js"></script>
 </body>
 </html>
