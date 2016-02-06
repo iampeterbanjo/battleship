@@ -37,6 +37,9 @@
 			this.changeState('welcome');
 			this.watchTargeting();
 			this.watchControls();
+			// dev only
+			this.drawShips(this.human.getShips());
+			this.drawShips(this.computer.getShips());
 		}
 		/**
 		 * Change state of play
@@ -119,22 +122,78 @@
 				});
 			}
 		}
+		/**
+		 * Alternate between player and computer
+		*/
+		, next: function() {
+			var me = this;
+
+			this.playersTurn = !this.playersTurn;
+
+			if(!this.playersTurn) {
+				me.changeState('COMPUTERS_TURN');
+
+				window.setTimeout(function() {
+					me.computersTurn();
+				}, 500);
+			} else {
+				me.changeState('PLAYERS_TURN');
+			}
+		}
+		/**
+		 * How players take shots at coordinates
+		 * @param {Coordinates} coordinates
+		 * @param {Element} input
+		*/
+		, aim: function(coordinates, input) {
+			var me = this
+					, hit = game.grid.target(coordinates);
+
+			input.checked = true;
+
+			if(coordinates.x && coordinates.y && hit) {
+				// alert('boom!');
+				input.classList.add('boom');
+			} else {
+				input.classList.add('miss');
+			}
+
+			if(!hit) {
+				this.next();
+			} else if(!this.playersTurn) {
+				window.setTimeout(function() {
+					me.computersTurn();
+				}, 500);
+			}
+		}
+		/**
+		 * Watch for player clicks
+		*/
 		, watchTargeting: function() {
+			var me = this;
 			this.gridElement.addEventListener('click', function(event) {
-				// if(!this.playerTurn) {
-				// 	return;
-				// }
+				if(!me.playersTurn) {
+					return;
+				}
 
 				var input = event.target
 						, x = parseInt(input.getAttribute('data-x'), 10)
 						, y = parseInt(input.getAttribute('data-y'), 10)
 						, coordinates = {x: x, y: y};
 
-				if(x && y && game.grid.target(coordinates)) {
-					// alert('boom!');
-					input.classList.add('boom');
-				}
+				me.aim(coordinates, input);
 			});
+		}
+		/**
+		 * The computer guess a ship position
+		*/
+		, computersTurn: function() {
+			console.log('computers Turn');
+			var coordinates = this.computer.guess()
+					, position = game.mapCoordinates(coordinates)
+					, input = $$('[data-coords="' + position + '"] input');
+
+			this.aim(coordinates, input);
 		}
 		/**
 		 * Lets the player change the state of the game

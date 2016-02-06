@@ -121,9 +121,27 @@ header {
     background: red;
   }
 }
+@keyframes miss {
+  0% {
+    background: white;
+  }
+  25% {
+    background: darkslategray;
+  }
+  50% {
+    background: darkslateblue;
+  }
+  100% {
+    background: darkslategray;
+  }
+}
 .boom + span {
   background-color: red;
   animation: boom 1s ease-in-out;
+}
+.miss + span {
+  background-color: darkslategray;
+  animation: miss 1s ease-in-out;
 }
 .accessibly-hidden {
   position: absolute;
