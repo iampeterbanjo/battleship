@@ -189,7 +189,7 @@ Returns **Ship**
 
 # vertical
 
-# x
+# vertical
 
 # x
 

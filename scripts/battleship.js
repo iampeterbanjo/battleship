@@ -170,7 +170,7 @@ var Game = Game || function() {
 	 * @returns {boolean}
 	*/
 	function validPoint(point) {
-		return point >= 0 && point <= self.grid.width;
+		return point >= 0 && point < self.grid.width;
 	}
 
 	/**
@@ -314,21 +314,37 @@ var Game = Game || function() {
 	function Coordinates(args) {
 		var defaults = {
 					random: false
-						, x: false
-						, y: false
-					}
-				, options;
+					, x: false
+					, y: false
+					, vertical: false
+					, size: 0
+				}
+				, options, maxX, maxY
+				, limitX = self.grid.width - 1
+				, limitY = self.grid.height - 1;
 
 		options = merge(defaults, args);
-		/** @todo: increase range of random int to spread
-		 * ships out on the board e.g. if vertical 10 < x > -1
-		 * else 10 < y > -1
-		*/
+		// increase range of random int to spread
+		// ships out on the board e.g. if vertical 10 < x > -1
+		//  else 10 < y > -1
+		if(options.random) {
+			options.vertical = !!self.getRandomInt(0,1);
+
+			if(options.vertical) {
+				maxX = limitX;
+				maxY = limitY - options.size;
+			} else {
+				maxX = limitX - options.size;
+				maxY = limitY;
+			}
+		}
 
 		/** @member {number} */
-		this.x = !!options.random ? self.getRandomInt(0,4) : (options.x || false);
+		this.x = !!options.random ? self.getRandomInt(0,maxX) : options.x;
 		/** @member {number} */
-		this.y = !!options.random ? self.getRandomInt(0,4) : (options.y || false);
+		this.y = !!options.random ? self.getRandomInt(0,maxY) : options.y;
+		/** @member {boolean} */
+		this.vertical = options.vertical;
 	}
 
 	/**
@@ -344,7 +360,7 @@ var Game = Game || function() {
 				, coordinates, options;
 
 		options = merge(defaults, args);
-		coordinates = new Coordinates({random: options.random});
+		coordinates = new Coordinates(options);
 
 		/** @member {number} */
 		this.x = coordinates.x;
@@ -364,12 +380,13 @@ var Game = Game || function() {
 		/** @constructor */
 		this.init = function() {
 			this.ships = this.ships.map(function(ship, index) {
-				var position = new Position({random: true});
 				if(index === 0) {
 					ship = createBattleship();
 				} else {
 					ship = createDestroyer();
 				}
+
+				var position = new Coordinates({random: true, size: ship.size});
 				self.grid.setPosition(ship, position);
 
 				return ship;
