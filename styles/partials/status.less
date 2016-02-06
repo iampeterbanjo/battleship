@@ -1,0 +1,21 @@
+.accessibly-hidden {
+	position: absolute;
+	left: 500%;
+	bottom: 500%;
+}
+
+.accessibly-unhidden {
+	position: relative;
+	left: auto;
+	bottom: auto;
+}
+
+.welcome-visible {
+	.accessibly-hidden;
+}
+
+.welcome {
+	.welcome-visible {
+		.accessibly-unhidden;
+	}
+}
