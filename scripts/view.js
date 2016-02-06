@@ -62,7 +62,7 @@
 			this.gridElement.appendChild(fragment);
 		}
 		, drawPlayerShips: function(ships, view) {
-			var coords, pos, ship;
+			var coords, pos, ship, element;
 
 			for (var index = 0; index < ships.length; index++) {
 				ship = ships[index];
@@ -70,7 +70,9 @@
 
 				coords.map(function(item, index) {
 					pos = game.mapCoordinates(item);
-					$$('[data-coords="' + pos + '"]').classList.add(ship.type);
+					element = $$('[data-coords="' + pos + '"]');
+					element.classList.add(ship.type);
+					element.classList.add(ship.owner);
 				});
 			}
 		}

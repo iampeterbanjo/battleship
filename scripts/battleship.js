@@ -232,6 +232,8 @@ var Game = Game || function() {
 		this.position = 0;
 		/** @member {Array} */
 		this.damage = [];
+		/** @member {string} */
+		this.owner = '';
 		/** @member {boolean} */
 		this.isDestroyed = function(){
 			return this.size === this.damage.length;
@@ -270,18 +272,24 @@ var Game = Game || function() {
 
 	/**
 	 * Creates Battleships
+	 * @param {string} owner
 	 * @returns {Ship} battleship
 	*/
-	function createBattleship() {
-		return ShipFactory('battleship');
+	function createBattleship(owner) {
+		var battleship = ShipFactory('battleship');
+		battleship.owner = owner;
+		return battleship;
 	}
 
 	/**
 	 * Creates Destroyers
+	 * @param {string} owner
 	 * @returns {Ship} destroyer
 	*/
-	function createDestroyer() {
-		return ShipFactory('destroyer');
+	function createDestroyer(owner) {
+		var destroyer = ShipFactory('destroyer');
+		destroyer.owner = owner;
+		return destroyer;
 	}
 
 	/**
@@ -349,8 +357,9 @@ var Game = Game || function() {
 
 	/**
 	 * A Player has 1 Battleshp and 2 Destroyers
+	 * @param {string} owner
 	*/
-	function Player() {
+	function Player(owner) {
 		// fill the array or else map wont work
 		/** @member {Ships[]} */
 		this.ships = new Array(3).fill(0);
@@ -358,9 +367,9 @@ var Game = Game || function() {
 		this.init = function() {
 			this.ships = this.ships.map(function(ship, index) {
 				if(index === 0) {
-					ship = createBattleship();
+					ship = createBattleship(owner);
 				} else {
-					ship = createDestroyer();
+					ship = createDestroyer(owner);
 				}
 
 				var position = new Coordinates({random: true, size: ship.size});
@@ -382,7 +391,7 @@ var Game = Game || function() {
 		 * @returns {Player}
 		*/
 		human: function() {
-			var player = new Player();
+			var player = new Player('friend');
 			player.init();
 
 			return player;
@@ -392,7 +401,7 @@ var Game = Game || function() {
 		 * @returns {Player}
 		*/
 		, computer: function() {
-			var player = new Player();
+			var player = new Player('foe');
 			player.init();
 
 			/** @returns {Coordinates} */

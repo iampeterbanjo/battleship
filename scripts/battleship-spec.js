@@ -80,7 +80,7 @@ describe('Battleships', function() {
 		var battleship;
 
 		beforeEach(function() {
-			battleship = new Game().createBattleship();
+			battleship = new Game().createBattleship('test');
 		});
 
 		it('should have a size', function() {
@@ -89,6 +89,10 @@ describe('Battleships', function() {
 
 		it('should have a type', function() {
 			expect(battleship.type).toBeDefined();
+		});
+
+		it('should have an owner', function() {
+			expect(battleship.owner).toBeDefined();
 		});
 
 		it('should have an unset position', function() {

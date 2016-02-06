@@ -84,11 +84,19 @@ Coordinates to access grid point x and y
 
 Creates Battleships
 
+**Parameters**
+
+-   `owner` **string** 
+
 Returns **Ship** battleship
 
 # createDestroyer
 
 Creates Destroyers
+
+**Parameters**
+
+-   `owner` **string** 
 
 Returns **Ship** destroyer
 
@@ -146,9 +154,15 @@ where values in first overwrite second
 
 Returns **Object** merged
 
+# owner
+
 # Player
 
 A Player has 1 Battleshp and 2 Destroyers
+
+**Parameters**
+
+-   `owner` **string** 
 
 # position
 

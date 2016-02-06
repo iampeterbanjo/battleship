@@ -53,10 +53,13 @@ td input input:checked + span {
   left: 0;
   text-align: center;
 }
-td.destroyer {
+.foe {
   border: 1px red solid;
 }
-td.destroyer span:before {
+.friend {
+  border: 1px blue solid;
+}
+.destroyer span:before {
   content: "D";
   font-size: 0.6em;
   line-height: 1.2em;
@@ -65,10 +68,7 @@ td.destroyer span:before {
   left: 0;
   text-align: center;
 }
-td.battleship {
-  border: 1px blue solid;
-}
-td.battleship span:before {
+.battleship span:before {
   content: "B";
   font-size: 0.6em;
   line-height: 1.2em;
