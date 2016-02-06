@@ -134,6 +134,18 @@ and maps it to grid coordinates
 
 Returns **Object** result {x, y}
 
+# merge
+
+merge two objects
+where values in first overwrite second
+
+**Parameters**
+
+-   `first` **Object** 
+-   `second` **Object** 
+
+Returns **Object** merged
+
 # Player
 
 A Player has 1 Battleshp and 2 Destroyers

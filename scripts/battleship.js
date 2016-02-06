@@ -285,6 +285,25 @@ var Game = Game || function() {
 	}
 
 	/**
+	 * merge two objects
+	 * where values in first overwrite second
+	 * @param {Object} first
+	 * @param {Object} second
+	 * @returns {Object} merged
+	*/
+	function merge(first, second) {
+		var merged = first || {};
+
+		for (var key in second) {
+			if (second.hasOwnProperty(key)) {
+				merged[key] = second[key];
+			}
+		}
+
+		return merged;
+	}
+
+	/**
 	 * Coordinates to access grid point x and y
 	 * @class
 	 * @param {Object} args
@@ -293,11 +312,14 @@ var Game = Game || function() {
 	 * @param {number} args.y
 	 */
 	function Coordinates(args) {
-		var options = args || {
+		var defaults = {
 					random: false
 						, x: false
 						, y: false
-					};
+					}
+				, options;
+
+		options = merge(defaults, args);
 		/** @todo: increase range of random int to spread
 		 * ships out on the board e.g. if vertical 10 < x > -1
 		 * else 10 < y > -1
@@ -315,11 +337,14 @@ var Game = Game || function() {
 	 * @class
 	 */
 	function Position(args) {
-		var options = args || {
+		var defaults = {
 						random: false
 						, vertical: false
 					}
-				, coordinates = new Coordinates({random: options.random});
+				, coordinates, options;
+
+		options = merge(defaults, args);
+		coordinates = new Coordinates({random: options.random});
 
 		/** @member {number} */
 		this.x = coordinates.x;
