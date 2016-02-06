@@ -30,6 +30,29 @@
 		init: function() {
 			this.watchTargeting();
 			this.drawGrid();
+			this.changeState('welcome');
+		}
+		/**
+		 * Change state of play
+		 * @param {string} status
+		*/
+		, changeState: function(status) {
+			var gameStatus = status.toUpperCase()
+					, body = $$('body')
+					, statusClasses = ['players-turn', 'welcome'];
+
+			switch(gameStatus) {
+				case 'WELCOME':
+					body.classList.remove(statusClasses.join(','));
+					body.classList.add('welcome');
+					break;
+				case 'PLAYERS_TURN':
+					body.classList.remove(statusClasses.join(' '));
+					body.classList.add('players-turn');
+					break;
+				default:
+					break;
+			}
 		}
 		/**
 		 * Draw the Game grid as a table
