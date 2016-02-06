@@ -348,29 +348,6 @@ var Game = Game || function() {
 	}
 
 	/**
-	 * Position Class to place ships with orientation
-	 * i.e. Coordinates with vertical property
-	 * @class
-	 */
-	function Position(args) {
-		var defaults = {
-						random: false
-						, vertical: false
-					}
-				, coordinates, options;
-
-		options = merge(defaults, args);
-		coordinates = new Coordinates(options);
-
-		/** @member {number} */
-		this.x = coordinates.x;
-		/** @member {number} */
-		this.y = coordinates.y;
-		/** @member {boolean} */
-		this.vertical = !!options.random ? !!self.getRandomInt(0,1) : !!options.vertical
-	}
-
-	/**
 	 * A Player has 1 Battleshp and 2 Destroyers
 	*/
 	function Player() {

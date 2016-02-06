@@ -152,15 +152,6 @@ A Player has 1 Battleshp and 2 Destroyers
 
 # position
 
-# Position
-
-Position Class to place ships with orientation
-i.e. Coordinates with vertical property
-
-**Parameters**
-
--   `args`  
-
 # Ship
 
 Ship
@@ -189,12 +180,6 @@ Returns **Ship**
 
 # vertical
 
-# vertical
-
 # x
-
-# x
-
-# y
 
 # y
