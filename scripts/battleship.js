@@ -170,7 +170,7 @@ var Game = Game || function() {
 	 * @returns {boolean}
 	*/
 	function validPoint(point) {
-		return point >= 0 && point <= self.grid.width;
+		return point >= 0 && point < self.grid.width;
 	}
 
 	/**
@@ -285,6 +285,25 @@ var Game = Game || function() {
 	}
 
 	/**
+	 * merge two objects
+	 * where values in first overwrite second
+	 * @param {Object} first
+	 * @param {Object} second
+	 * @returns {Object} merged
+	*/
+	function merge(first, second) {
+		var merged = first || {};
+
+		for (var key in second) {
+			if (second.hasOwnProperty(key)) {
+				merged[key] = second[key];
+			}
+		}
+
+		return merged;
+	}
+
+	/**
 	 * Coordinates to access grid point x and y
 	 * @class
 	 * @param {Object} args
@@ -293,40 +312,39 @@ var Game = Game || function() {
 	 * @param {number} args.y
 	 */
 	function Coordinates(args) {
-		var options = args || {
+		var defaults = {
 					random: false
-						, x: false
-						, y: false
-					};
-		/** @todo: increase range of random int to spread
-		 * ships out on the board e.g. if vertical 10 < x > -1
-		 * else 10 < y > -1
-		*/
+					, x: false
+					, y: false
+					, vertical: false
+					, size: 0
+				}
+				, options, maxX, maxY
+				, limitX = self.grid.width - 1
+				, limitY = self.grid.height - 1;
+
+		options = merge(defaults, args);
+		// increase range of random int to spread
+		// ships out on the board e.g. if vertical 10 < x > -1
+		//  else 10 < y > -1
+		if(options.random) {
+			options.vertical = !!self.getRandomInt(0,1);
+
+			if(options.vertical) {
+				maxX = limitX;
+				maxY = limitY - options.size;
+			} else {
+				maxX = limitX - options.size;
+				maxY = limitY;
+			}
+		}
 
 		/** @member {number} */
-		this.x = !!options.random ? self.getRandomInt(0,4) : (options.x || false);
+		this.x = !!options.random ? self.getRandomInt(0,maxX) : options.x;
 		/** @member {number} */
-		this.y = !!options.random ? self.getRandomInt(0,4) : (options.y || false);
-	}
-
-	/**
-	 * Position Class to place ships with orientation
-	 * i.e. Coordinates with vertical property
-	 * @class
-	 */
-	function Position(args) {
-		var options = args || {
-						random: false
-						, vertical: false
-					}
-				, coordinates = new Coordinates({random: options.random});
-
-		/** @member {number} */
-		this.x = coordinates.x;
-		/** @member {number} */
-		this.y = coordinates.y;
+		this.y = !!options.random ? self.getRandomInt(0,maxY) : options.y;
 		/** @member {boolean} */
-		this.vertical = !!options.random ? !!self.getRandomInt(0,1) : !!options.vertical
+		this.vertical = options.vertical;
 	}
 
 	/**
@@ -339,12 +357,13 @@ var Game = Game || function() {
 		/** @constructor */
 		this.init = function() {
 			this.ships = this.ships.map(function(ship, index) {
-				var position = new Position({random: true});
 				if(index === 0) {
 					ship = createBattleship();
 				} else {
 					ship = createDestroyer();
 				}
+
+				var position = new Coordinates({random: true, size: ship.size});
 				self.grid.setPosition(ship, position);
 
 				return ship;
