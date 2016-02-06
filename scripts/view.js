@@ -1,5 +1,5 @@
 (function() {
-	var game = new Game();
+	var game = new Game(), gameView;
 	game.grid.init();
 	/**
 	 * Shorthand for document.querySelector
@@ -21,16 +21,22 @@
 
 	function GameView() {
 		this.gridElement = $$('.grid');
+		this.human = game.human();
+		this.computer = game.computer();
 		this.playersTurn = true;
 	}
 
 
 	GameView.prototype = {
-		/* @constructor */
+		/**
+		 * Starts the game
+		 * @constructor
+		 */
 		init: function() {
-			this.watchTargeting();
 			this.drawGrid();
 			this.changeState('welcome');
+			this.watchTargeting();
+			this.watchControls();
 		}
 		/**
 		 * Change state of play
@@ -39,20 +45,33 @@
 		, changeState: function(status) {
 			var gameStatus = status.toUpperCase()
 					, body = $$('body')
-					, statusClasses = ['players-turn', 'welcome'];
+					, statusClasses = ['players-turn', 'welcome', 'end'];
+
+			statusClasses.map(function(klass) {
+				body.classList.remove(klass);
+			});
 
 			switch(gameStatus) {
 				case 'WELCOME':
-					body.classList.remove(statusClasses.join(','));
 					body.classList.add('welcome');
 					break;
+				case 'END':
+					body.classList.add('end');
+					break;
 				case 'PLAYERS_TURN':
-					body.classList.remove(statusClasses.join(' '));
 					body.classList.add('players-turn');
 					break;
 				default:
 					break;
 			}
+		}
+		/**
+		 * Ends the game
+		*/
+		, end: function() {
+			this.changeState('end');
+			this.drawShips(this.human.getShips());
+			this.drawShips(this.computer.getShips());
 		}
 		/**
 		 * Draw the Game grid as a table
@@ -84,7 +103,7 @@
 
 			this.gridElement.appendChild(fragment);
 		}
-		, drawPlayerShips: function(ships, view) {
+		, drawShips: function(ships) {
 			var coords, pos, ship, element;
 
 			for (var index = 0; index < ships.length; index++) {
@@ -114,22 +133,24 @@
 					// alert('boom!');
 					input.classList.add('boom');
 				}
-			})
+			});
+		}
+		/**
+		 * Lets the player change the state of the game
+		*/
+		, watchControls: function() {
+			var me = this;
+			$$('.end').addEventListener('click', function(event) {
+				me.end();
+
+				event.preventDefault();
+			});
 		}
 	};
 
 	document.addEventListener('DOMContentLoaded', function() {
-		var gameView = new GameView()
-				, human = game.human()
-				, computer = game.computer()
-				, humanShips = human.getShips()
-				, computerShips = computer.getShips();
+		gameView = new GameView();
 
 		gameView.init();
-
-		gameView.drawPlayerShips(humanShips);
-		gameView.drawPlayerShips(computerShips);
-		gameView.watchTargeting();
-
 	});
 })();

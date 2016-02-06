@@ -122,3 +122,29 @@ header {
   background-color: red;
   animation: boom 1s ease-in-out;
 }
+.accessibly-hidden {
+  position: absolute;
+  left: 500%;
+  bottom: 500%;
+}
+.accessibly-unhidden {
+  position: relative;
+  left: auto;
+  bottom: auto;
+}
+.welcome-visible,
+.end-visible {
+  position: absolute;
+  left: 500%;
+  bottom: 500%;
+}
+.welcome .welcome-visible {
+  position: relative;
+  left: auto;
+  bottom: auto;
+}
+.end .end-visible {
+  position: relative;
+  left: auto;
+  bottom: auto;
+}
