@@ -20,10 +20,16 @@
 	}
 
 	function GameView() {
+		/** @member {Element} */
 		this.gridElement = $$('.grid');
+		/** @member {Player} */
 		this.human = game.human();
+		/** @member {Player} */
 		this.computer = game.computer();
+		/** @member {boolean} */
 		this.playersTurn = true;
+		/** @member {number} */
+		this.computerTimeout = 1000;
 	}
 
 
@@ -63,6 +69,9 @@
 					break;
 				case 'PLAYERS_TURN':
 					body.classList.add('players-turn');
+					break;
+				case 'COMPUTERS_TURN':
+					body.classList.add('computers-turn');
 					break;
 				default:
 					break;
@@ -135,7 +144,7 @@
 
 				window.setTimeout(function() {
 					me.computersTurn();
-				}, 500);
+				}, me.computerTimeout);
 			} else {
 				me.changeState('PLAYERS_TURN');
 			}
@@ -163,7 +172,7 @@
 			} else if(!this.playersTurn) {
 				window.setTimeout(function() {
 					me.computersTurn();
-				}, 500);
+				}, me.computerTimeout);
 			}
 		}
 		/**
