@@ -45,6 +45,33 @@ td input input:checked + span {
   display: inline-block;
   z-index: -2;
 }
+.container {
+  margin: 0 auto;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+header {
+  text-align: center;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+}
+@media (min-width: 52em) {
+  .container {
+    width: 52em;
+  }
+  .main,
+  .sidebar {
+    display: inline-block;
+    padding: 0 1em;
+  }
+  .sidebar {
+    width: 16em;
+    float: right;
+  }
+  .main {
+    width: 33em;
+  }
+}
 .ship-text {
   font-size: 0.6em;
   line-height: 1.2em;
@@ -76,33 +103,6 @@ td input input:checked + span {
   top: 0;
   left: 0;
   text-align: center;
-}
-.container {
-  margin: 0 auto;
-  padding-left: 1em;
-  padding-right: 1em;
-}
-header {
-  text-align: center;
-  padding-top: 1.5em;
-  padding-bottom: 1.5em;
-}
-@media (min-width: 52em) {
-  .container {
-    width: 52em;
-  }
-  .main,
-  .sidebar {
-    display: inline-block;
-    padding: 0 1em;
-  }
-  .sidebar {
-    width: 16em;
-    float: right;
-  }
-  .main {
-    width: 33em;
-  }
 }
 @keyframes boom {
   0% {

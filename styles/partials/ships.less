@@ -1,0 +1,31 @@
+.ship-text {
+	font-size: @text-small;
+	line-height: @text-small * 2;
+	position: absolute;
+	top: 0;
+	left: 0;
+	text-align: center;
+}
+
+.foe {
+	border: 1px red solid;
+}
+
+.friend {
+	border: 1px blue solid;
+}
+
+.destroyer {
+
+	span:before {
+		content: "D";
+		.ship-text;
+	}
+}
+
+.battleship {
+	span:before {
+		content: "B";
+		.ship-text;
+	}
+}

@@ -1,0 +1,11 @@
+@keyframes boom {
+	0% { background: white;}
+	25% { background: red; }
+	50% { background: yellow; }
+	100% { background: red; }
+}
+
+.boom + span {
+	background-color: red;
+	animation: boom 1s ease-in-out;
+}
