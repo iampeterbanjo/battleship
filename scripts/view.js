@@ -22,6 +22,10 @@
 	function GameView() {
 		/** @member {Element} */
 		this.gridElement = $$('.grid');
+		/** @member {Element} */
+		this.playerScore = $$('#player-score');
+		/** @member {Element} */
+		this.computerScore = $$('#computer-score');
 		/** @member {Player} */
 		this.human = game.human();
 		/** @member {Player} */
@@ -30,6 +34,7 @@
 		this.playersTurn = true;
 		/** @member {number} */
 		this.computerTimeout = 1000;
+		this.scores = { player: 0 , computer: 0 };
 	}
 
 
@@ -149,6 +154,16 @@
 				me.changeState('PLAYERS_TURN');
 			}
 		}
+		/** Update score board*/
+		, updateScores: function() {
+			if(this.playersTurn) {
+				this.scores.player += 1;
+				this.playerScore.innerHTML = this.scores.player;
+			} else {
+				this.scores.computer += 1;
+				this.computerScore.innerHTML = this.scores.player;
+			}
+		}
 		/**
 		 * How players take shots at coordinates
 		 * @param {Coordinates} coordinates
@@ -169,10 +184,14 @@
 
 			if(!hit) {
 				this.next();
-			} else if(!this.playersTurn) {
-				window.setTimeout(function() {
-					me.computersTurn();
-				}, me.computerTimeout);
+			} else {
+				this.updateScores();
+
+				if(!this.playersTurn) {
+					window.setTimeout(function() {
+						me.computersTurn();
+					}, me.computerTimeout);
+				}
 			}
 		}
 		/**
