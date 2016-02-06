@@ -101,6 +101,7 @@
 				fragment.appendChild(tr);
 			}
 
+			this.gridElement.innerHTML = '';
 			this.gridElement.appendChild(fragment);
 		}
 		, drawShips: function(ships) {
@@ -142,6 +143,11 @@
 			var me = this;
 			$$('.end').addEventListener('click', function(event) {
 				me.end();
+
+				event.preventDefault();
+			});
+			$$('.start').addEventListener('click', function(event) {
+				me.init();
 
 				event.preventDefault();
 			});
