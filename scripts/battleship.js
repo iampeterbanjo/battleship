@@ -41,6 +41,49 @@ var Game = Game || function() {
 		}
 
 		/**
+		 * If the ships are placed randomly and
+		 * have collisions/overlap then the game
+		 * is not fair
+		 * @param {Ship[]} ships
+		 * @return {Coordinates[]} coordinates
+		*/
+		// , hasCollisions: function(ships) {
+		// 	var collisions = [];
+
+		// 	ships.reduce(function(prev, next, index) {
+		// 		prev.coordinates.map(function(coords) {
+
+		// 		})
+		// 		if() {
+
+		// 		}
+		// 	});
+		// }
+		/**
+		 * Return all the squares on the grid
+		 * the ship of a certain size and orientation
+		 * will occupy given the coordinates
+		 *
+		*/
+		, getProjection: function(coordinates) {
+				var projection = []
+						, newX, newY;
+
+				for (var index = 0; index < coordinates.size; index++) {
+					if(coordinates.vertical) {
+						newX = coordinates.x;
+						newY = coordinates.y + index;
+					} else {
+						newX = coordinates.x + index;
+						newY = coordinates.y;
+					}
+
+					projection.push({x: newX, y: newY});
+				}
+
+			return projection;
+		}
+		/**
 		 * Sets a ship at a position
 		 * @param {Ship} ship
 		 * @param {Object} position

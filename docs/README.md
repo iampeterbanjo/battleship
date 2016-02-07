@@ -15,6 +15,29 @@ Find a ship on the board given the coordinates
     -   `coordinates.x` **number** 
     -   `coordinates.y` **number** 
 
+# getProjection
+
+Return all the squares on the grid
+the ship of a certain size and orientation
+will occupy given the coordinates
+
+**Parameters**
+
+-   `coordinates`  
+
+# getProjection
+
+If the ships are placed randomly and
+have collisions/overlap then the game
+is not fair
+
+**Parameters**
+
+-   `ships` **Array&lt;Ship&gt;** 
+-   `coordinates`  
+
+Returns **Array&lt;Coordinates&gt;** coordinates
+
 # init
 
 # setPosition

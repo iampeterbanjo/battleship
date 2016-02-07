@@ -164,6 +164,26 @@ describe('Battleships', function() {
 			expect(destroyer.damage.length).toBe(1);
 			expect(destroyer.damage[0]).toEqual(coordinates);
 		});
+
+		it('should get the projection given coordinates', function() {
+			var horizontalProjection = grid.getProjection({x:0, y:0, vertical:false, size:4})
+					, verticalProjection = grid.getProjection({x:0, y:0, vertical:true, size:4})
+					, expectedHorizontalProjection = [
+						{x: 0, y: 0}
+						, {x: 1, y: 0}
+						, {x: 2, y: 0}
+						, {x: 3, y: 0}
+					]
+					, expectedVerticalProjection = [
+						{x: 0, y: 0}
+						, {x: 0, y: 1}
+						, {x: 0, y: 2}
+						, {x: 0, y: 3}
+					]
+
+			expect(horizontalProjection).toEqual(expectedHorizontalProjection);
+			expect(verticalProjection).toEqual(expectedVerticalProjection);
+		});
 	}); // the Grid
 
 	describe('the Rules', function() {
