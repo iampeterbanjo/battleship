@@ -31,34 +31,15 @@ var Game = Game || function() {
 		 */
 		, validPosition: function(ship, position) {
 			var valid = false;
-			if(position.vertical && position.y + ship.size < this.height) {
+			if(position.vertical && (position.y + ship.size) <= this.height) {
 				valid = true;
-			} else if(!position.vertical && position.x + ship.size < this.width) {
+			} else if(!position.vertical && (position.x + ship.size) <= this.width) {
 				valid = true;
 			}
 
 			return valid;
 		}
 
-		/**
-		 * If the ships are placed randomly and
-		 * have collisions/overlap then the game
-		 * is not fair
-		 * @param {Ship[]} ships
-		 * @return {Coordinates[]} coordinates
-		*/
-		// , hasCollisions: function(ships) {
-		// 	var collisions = [];
-
-		// 	ships.reduce(function(prev, next, index) {
-		// 		prev.coordinates.map(function(coords) {
-
-		// 		})
-		// 		if() {
-
-		// 		}
-		// 	});
-		// }
 		/**
 		 * Return all the squares on the grid
 		 * the ship of a certain size and orientation
@@ -354,6 +335,18 @@ var Game = Game || function() {
 		return merged;
 	}
 
+	/** get the next quadrant */
+	self.quadrant = 0;
+	function nextQuadrant() {
+		if(self.quadrant === 4) {
+			self.quadrant = 1;
+		} else {
+			self.quadrant += 1;
+		}
+
+		return self.quadrant;
+	}
+
 	/**
 	 * Coordinates to access grid point x and y
 	 * @class
@@ -370,9 +363,15 @@ var Game = Game || function() {
 					, vertical: false
 					, size: 0
 				}
-				, options, maxX, maxY
+				, options
+				, newX
+				, newY
+				, edge
+				, currentQuadrant = nextQuadrant()
 				, limitX = self.grid.width - 1
-				, limitY = self.grid.height - 1;
+				, limitY = self.grid.height - 1
+				, halfLimitX = Math.floor(limitX / 2)
+				, halfLimitY = Math.floor(limitY / 2);
 
 		options = merge(defaults, args);
 		// increase range of random int to spread
@@ -381,21 +380,48 @@ var Game = Game || function() {
 		if(options.random) {
 			options.vertical = !!self.getRandomInt(0,1);
 
-			if(options.vertical) {
-				maxX = limitX;
-				maxY = limitY - options.size;
+			// to prevent collisions divide the grid
+			// into four quadrants and define their edges
+			if(currentQuadrant === 1) {
+				edge = {
+					x: { min: 0, max: halfLimitX }
+					, y: { min: 0, max: halfLimitY }
+				}
+			} else if(currentQuadrant === 2) {
+				edge = {
+					x: { min: halfLimitX + 1, max: limitX }
+					, y: { min: 0, max: halfLimitX }
+				}
+			} else if(currentQuadrant === 3) {
+				edge = {
+					x: { min: 0, max: halfLimitX }
+					, y: { min: halfLimitY + 1, max: limitY }
+				}
 			} else {
-				maxX = limitX - options.size;
-				maxY = limitY;
+				edge = {
+					x: { min: halfLimitX + 1, max: limitX }
+					, y: { min: halfLimitY + 1, max: limitY }
+				}
+			}
+
+			// if its vertical x can be random
+			// if its horizontal y can be random
+			if(options.vertical) {
+				newX = self.getRandomInt(edge.x.min, edge.x.max);
+				newY = edge.y.min;
+			} else {
+				newX = edge.x.min;
+				newY = self.getRandomInt(edge.y.min, edge.y.max);
 			}
 		}
 
 		/** @member {number} */
-		this.x = !!options.random ? self.getRandomInt(0,maxX) : options.x;
+		this.x = !!options.random ? newX : options.x;
 		/** @member {number} */
-		this.y = !!options.random ? self.getRandomInt(0,maxY) : options.y;
+		this.y = !!options.random ? newY : options.y;
 		/** @member {boolean} */
 		this.vertical = options.vertical;
+		this.quadrant = currentQuadrant;
 	}
 
 	/**
@@ -403,6 +429,7 @@ var Game = Game || function() {
 	 * @param {string} owner
 	*/
 	function Player(owner) {
+		self.quadrant = self.getRandomInt(1,4);
 		// fill the array or else map wont work
 		/** @member {Ships[]} */
 		this.ships = new Array(3).fill(0);

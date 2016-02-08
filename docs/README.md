@@ -25,19 +25,6 @@ will occupy given the coordinates
 
 -   `coordinates`  
 
-# getProjection
-
-If the ships are placed randomly and
-have collisions/overlap then the game
-is not fair
-
-**Parameters**
-
--   `ships` **Array&lt;Ship&gt;** 
--   `coordinates`  
-
-Returns **Array&lt;Coordinates&gt;** coordinates
-
 # init
 
 # setPosition
@@ -85,6 +72,10 @@ Gets a random int between min and max
 -   `max` **number** 
 
 Returns **number** 
+
+# quadrant
+
+get the next quadrant
 
 # computer
 
