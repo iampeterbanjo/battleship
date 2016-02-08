@@ -31,10 +31,13 @@ var Game = Game || function() {
 		 */
 		, validPosition: function(ship, position) {
 			var valid = false;
-			if(position.vertical && (position.y + ship.size) <= this.height) {
-				valid = true;
-			} else if(!position.vertical && (position.x + ship.size) <= this.width) {
-				valid = true;
+			if(validPoint(position.y) && validPoint(position.x)) {
+
+				if(position.vertical && (position.y + ship.size) <= this.height) {
+					valid = true;
+				} else if(!position.vertical && (position.x + ship.size) <= this.width) {
+					valid = true;
+				}
 			}
 
 			return valid;
@@ -145,7 +148,6 @@ var Game = Game || function() {
 	/**
 	 * Converts a string or number point
 	 * to string between A-J or number between 0 - 9
-	 * @private
 	 * @param {string|number} z
 	 * @returns {string|number} result
 	*/
@@ -189,7 +191,6 @@ var Game = Game || function() {
 	/**
 	 * Checks a point is between the range
 	 * of the grid
-	 * @private
 	 * @param {number} point
 	 * @returns {boolean}
 	*/
@@ -264,12 +265,12 @@ var Game = Game || function() {
 		}
 	}
 
-	/** @private */
+	/** creates a destroyer */
 	function Destroyer(){
 		return new Ship({size: 4, type: 'destroyer'});
 	}
 
-	/** @private */
+	/** creates a battleship */
 	function Battleship() {
 		return new Ship({size: 5, type: 'battleship'});
 	}
@@ -374,14 +375,19 @@ var Game = Game || function() {
 				, halfLimitY = Math.floor(limitY / 2);
 
 		options = merge(defaults, args);
-		// increase range of random int to spread
-		// ships out on the board e.g. if vertical 10 < x > -1
-		//  else 10 < y > -1
+
 		if(options.random) {
 			options.vertical = !!self.getRandomInt(0,1);
 
 			// to prevent collisions divide the grid
 			// into four quadrants and define their edges
+			/*
+					---------
+					| 1 | 2	|
+					|--------
+					| 3 | 4 |
+					---------
+			*/
 			if(currentQuadrant === 1) {
 				edge = {
 					x: { min: 0, max: halfLimitX }

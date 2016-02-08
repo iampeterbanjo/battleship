@@ -1,3 +1,18 @@
+# Battleship
+
+creates a battleship
+
+# chronometer
+
+Converts a string or number point
+to string between A-J or number between 0 - 9
+
+**Parameters**
+
+-   `z` **string or number** 
+
+Returns **string or number** result
+
 # createTwoDimensionalArray
 
 Creates a two dimensional array for the board
@@ -116,6 +131,10 @@ Returns **Ship** destroyer
 
 # damage
 
+# Destroyer
+
+creates a destroyer
+
 # getShips
 
 Returns **Ships** this.ships
@@ -205,6 +224,17 @@ Returns **Ship**
 # size
 
 # type
+
+# validPoint
+
+Checks a point is between the range
+of the grid
+
+**Parameters**
+
+-   `point` **number** 
+
+Returns **boolean** 
 
 # vertical
 
