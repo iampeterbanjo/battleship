@@ -31,7 +31,7 @@ var Game = Game || function() {
 		 */
 		, validPosition: function(ship, position) {
 			var valid = false;
-			if(validPoint(position.y) && validPoint(position.x)) {
+			if(this.validPoint(position.y) && this.validPoint(position.x)) {
 
 				if(position.vertical && (position.y + ship.size) <= this.height) {
 					valid = true;
@@ -41,6 +41,16 @@ var Game = Game || function() {
 			}
 
 			return valid;
+		}
+
+		/**
+		* Checks a point is between the range
+		* of the grid
+		* @param {number} point
+		* @returns {boolean}
+		*/
+		, validPoint: function(point) {
+			return point >= 0 && point < self.grid.width;
 		}
 
 		/**
@@ -122,6 +132,7 @@ var Game = Game || function() {
 		 */
 		, target: function(coordinates) {
 			var ship = this.getPosition(coordinates);
+			console.dir(ship);
 			if(ship) {
 				ship.damage.push(coordinates);
 			}
@@ -187,17 +198,6 @@ var Game = Game || function() {
 		return result;
 	}
 
-
-	/**
-	 * Checks a point is between the range
-	 * of the grid
-	 * @param {number} point
-	 * @returns {boolean}
-	*/
-	function validPoint(point) {
-		return point >= 0 && point < self.grid.width;
-	}
-
 	/**
 	 * Gets user input in form of [a-j][d] e.g. 'A5'
 	 * and maps it to grid coordinates
@@ -209,7 +209,7 @@ var Game = Game || function() {
 				, number = input.slice(1) * 1
 				, coordinates = {}
 
-		if(/[a-j]/.exec(letter) && validPoint(number)) {
+		if(/[a-j]/.exec(letter) && self.grid.validPoint(number)) {
 			coordinates.x = self.chronometer(letter);
 			coordinates.y = number;
 		} else {
@@ -232,7 +232,7 @@ var Game = Game || function() {
 				, y = coordinates.y
 				, result;
 
-		if(x && validPoint(y)) {
+		if(x && self.grid.validPoint(y)) {
 			result = x.toUpperCase() + y;
 		} else {
 			throw new Error('invalid coordinates');

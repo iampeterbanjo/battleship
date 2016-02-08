@@ -65,6 +65,17 @@ ship located there
     -   `coordinates.x` **number** 
     -   `coordinates.y` **number** 
 
+# validPoint
+
+Checks a point is between the range
+of the grid
+
+**Parameters**
+
+-   `point` **number** 
+
+Returns **boolean** 
+
 # validPosition
 
 Checks if the proposed location for a ship
@@ -224,17 +235,6 @@ Returns **Ship**
 # size
 
 # type
-
-# validPoint
-
-Checks a point is between the range
-of the grid
-
-**Parameters**
-
--   `point` **number** 
-
-Returns **boolean** 
 
 # vertical
 

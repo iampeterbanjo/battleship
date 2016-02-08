@@ -175,7 +175,8 @@
 
 			input.checked = true;
 
-			if(coordinates.x && coordinates.y && hit) {
+			if(game.grid.validPoint(coordinates.x)
+			&& game.grid.validPoint(coordinates.y) && hit) {
 				// alert('boom!');
 				input.classList.add('boom');
 			} else {
@@ -216,7 +217,6 @@
 		 * The computer guess a ship position
 		*/
 		, computersTurn: function() {
-			console.log('computers Turn');
 			var coordinates = this.computer.guess()
 					, position = game.mapCoordinates(coordinates)
 					, input = $$('[data-coords="' + position + '"] input');
