@@ -127,13 +127,13 @@ var Game = Game || function() {
 		 * Targets a position on the grid and damages any
 		 * ship located there
 		 * @param {Object} coordinates
+		 * @param {Player} player
 		 * @param {number} coordinates.x
 		 * @param {number} coordinates.y
 		 */
-		, target: function(coordinates) {
+		, target: function(coordinates, player) {
 			var ship = this.getPosition(coordinates);
-			console.dir(ship);
-			if(ship) {
+			if(ship && ship.owner !== player.name) {
 				ship.damage.push(coordinates);
 			}
 
@@ -436,6 +436,9 @@ var Game = Game || function() {
 	*/
 	function Player(owner) {
 		self.quadrant = self.getRandomInt(1,4);
+
+		/** @member string */
+		this.name = owner;
 		// fill the array or else map wont work
 		/** @member {Ships[]} */
 		this.ships = new Array(3).fill(0);

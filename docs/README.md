@@ -64,6 +64,7 @@ ship located there
 -   `coordinates` **Object** 
     -   `coordinates.x` **number** 
     -   `coordinates.y` **number** 
+-   `player` **Player** 
 
 # validPoint
 
@@ -197,6 +198,8 @@ where values in first overwrite second
 -   `second` **Object** 
 
 Returns **Object** merged
+
+# name
 
 # owner
 

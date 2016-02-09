@@ -44,11 +44,16 @@ describe('Battleships', function() {
 	}); // The Game
 
 	describe('the Player(s)', function() {
-		var human;
+		var human, computer;
 
 		beforeEach(function() {
 			game.grid.init();
 			human = game.human();
+			computer = game.computer();
+		});
+
+		it('should have a name', function() {
+			expect(human.name).toBeDefined();
 		});
 
 		it('should have ships', function() {
@@ -84,7 +89,7 @@ describe('Battleships', function() {
 		it('should know if all its ships are destroyed', function() {
 			human.getShips().map(function(ship) {
 				ship.position.coordinates.map(function(coords) {
-					game.grid.target(coords);
+					game.grid.target(coords, computer);
 				});
 			});
 
@@ -125,12 +130,14 @@ describe('Battleships', function() {
 	}); // the Ship(s)
 
 	describe('the Grid', function() {
-		var grid, game;
+		var grid, game, human, computer;
 
 		beforeEach(function() {
 			game = new Game();
 			grid = game.grid;
 			grid.init();
+			human = game.human();
+			computer = game.computer();
 		});
 
 		it('should have a way to get/set a position on the grid', function() {
@@ -170,13 +177,13 @@ describe('Battleships', function() {
 		});
 
 		it('should damage a targeted ship', function() {
-			var destroyer = game.createDestroyer()
+			var destroyer = human.getShips()[1]
 					, position = {x: 2, y: 2, vertical: false}
 					, coordinates = {x: position.x, y: position.y};
 
 			grid.setPosition(destroyer, position);
 
-			expect(grid.target(coordinates)).toBe(true);
+			expect(grid.target(coordinates, computer)).toBe(true);
 			expect(destroyer.damage.length).toBe(1);
 			expect(destroyer.damage[0]).toEqual(coordinates);
 		});
@@ -203,10 +210,13 @@ describe('Battleships', function() {
 	}); // the Grid
 
 	describe('the Rules', function() {
-		var game;
+		var game, human, computer;
+
 		beforeEach(function() {
 			game = new Game();
 			game.grid.init();
+			human = game.human();
+			computer = game.computer();
 		});
 
 		it('should start with player\'s ships at random positions', function() {
@@ -228,11 +238,11 @@ describe('Battleships', function() {
 		});
 
 		it('should destroy completely damaged ships', function() {
-			var destroyer = game.createDestroyer();
+			var destroyer = human.getShips()[0];
 
 			game.grid.setPosition(destroyer, {x: 0, y: 0, vertical: false});
 			for (var index = 0; index < destroyer.size; index++) {
-				game.grid.target({x: index, y: 0});
+				game.grid.target({x: index, y: 0}, computer);
 			}
 			expect(destroyer.isDestroyed()).toBe(true);
 		});
