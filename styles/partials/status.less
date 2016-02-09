@@ -10,7 +10,12 @@
 	bottom: auto;
 }
 
-.welcome-visible, .end-visible, .players-turn-visible, .computers-turn-visible {
+.win-visible,
+.lose-visible,
+.welcome-visible,
+.end-visible,
+.players-turn-visible,
+.computers-turn-visible {
 	.accessibly-hidden;
 }
 
@@ -34,6 +39,18 @@
 
 .players-turn {
 	.players-turn-visible {
+		.accessibly-unhidden;
+	}
+}
+
+.lose {
+	.lose-visible {
+		.accessibly-unhidden;
+	}
+}
+
+.win {
+	.win-visible {
 		.accessibly-unhidden;
 	}
 }

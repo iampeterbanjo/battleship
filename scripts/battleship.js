@@ -453,6 +453,18 @@ var Game = Game || function() {
 
 				return ship;
 			});
+
+			this.areAllShipsDestroyed = function() {
+				var shipsDestroyed = 0;
+
+				this.ships.map(function (ship) {
+					if(ship.isDestroyed()) {
+						shipsDestroyed++;
+					}
+				});
+
+				return shipsDestroyed === this.ships.length;
+			}
 		}
 		/**
 		 * @returns {Ships} this.ships

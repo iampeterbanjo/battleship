@@ -74,6 +74,22 @@ describe('Battleships', function() {
 			expect(battleship.length).toBe(1);
 			expect(destroyers.length).toBe(2);
 		});
+
+		it('should have all ships undestroyed', function() {
+			var ships = human.getShips();
+
+			expect(human.areAllShipsDestroyed()).toBe(false);
+		});
+
+		it('should know if all its ships are destroyed', function() {
+			human.getShips().map(function(ship) {
+				ship.position.coordinates.map(function(coords) {
+					game.grid.target(coords);
+				});
+			});
+
+			expect(human.areAllShipsDestroyed()).toBe(true);
+		});
 	});	// the Players
 
 	describe('the Ship(s)', function() {

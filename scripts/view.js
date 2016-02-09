@@ -154,6 +154,10 @@
 				me.changeState('PLAYERS_TURN');
 			}
 		}
+		, checkForWinner: function() {
+			
+
+		}
 		/** Update score board*/
 		, updateScores: function() {
 			if(this.playersTurn) {
@@ -163,6 +167,8 @@
 				this.scores.computer += 1;
 				this.computerScore.innerHTML = this.scores.player;
 			}
+
+			this.checkForWinner();
 		}
 		/**
 		 * How players take shots at coordinates

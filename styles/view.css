@@ -153,6 +153,8 @@ header {
   left: auto;
   bottom: auto;
 }
+.win-visible,
+.lose-visible,
 .welcome-visible,
 .end-visible,
 .players-turn-visible,
@@ -177,6 +179,16 @@ header {
   bottom: auto;
 }
 .players-turn .players-turn-visible {
+  position: relative;
+  left: auto;
+  bottom: auto;
+}
+.lose .lose-visible {
+  position: relative;
+  left: auto;
+  bottom: auto;
+}
+.win .win-visible {
   position: relative;
   left: auto;
   bottom: auto;
