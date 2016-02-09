@@ -59,7 +59,7 @@
 		, changeState: function(status) {
 			var gameStatus = status.toUpperCase()
 					, body = $$('body')
-					, statusClasses = ['players-turn', 'welcome', 'end'];
+					, statusClasses = ['players-turn', 'computers-turn', 'welcome', 'end'];
 
 			statusClasses.map(function(klass) {
 				body.classList.remove(klass);
@@ -67,7 +67,7 @@
 
 			switch(gameStatus) {
 				case 'WELCOME':
-					body.classList.add('welcome');
+					body.classList.add('welcome','players-turn');
 					break;
 				case 'END':
 					body.classList.add('end');

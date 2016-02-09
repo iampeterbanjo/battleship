@@ -10,7 +10,7 @@
 	bottom: auto;
 }
 
-.welcome-visible, .end-visible {
+.welcome-visible, .end-visible, .players-turn-visible, .computers-turn-visible {
 	.accessibly-hidden;
 }
 
@@ -22,6 +22,18 @@
 
 .end {
 	.end-visible {
+		.accessibly-unhidden;
+	}
+}
+
+.computers-turn {
+	.computers-turn-visible {
+		.accessibly-unhidden;
+	}
+}
+
+.players-turn {
+	.players-turn-visible {
 		.accessibly-unhidden;
 	}
 }

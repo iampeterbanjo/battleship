@@ -154,7 +154,9 @@ header {
   bottom: auto;
 }
 .welcome-visible,
-.end-visible {
+.end-visible,
+.players-turn-visible,
+.computers-turn-visible {
   position: absolute;
   left: 500%;
   bottom: 500%;
@@ -165,6 +167,16 @@ header {
   bottom: auto;
 }
 .end .end-visible {
+  position: relative;
+  left: auto;
+  bottom: auto;
+}
+.computers-turn .computers-turn-visible {
+  position: relative;
+  left: auto;
+  bottom: auto;
+}
+.players-turn .players-turn-visible {
   position: relative;
   left: auto;
   bottom: auto;
