@@ -1,0 +1,62 @@
+.accessibly-hidden {
+	position: absolute;
+	left: 500%;
+	bottom: 500%;
+}
+
+.accessibly-unhidden {
+	position: relative;
+	left: auto;
+	bottom: auto;
+}
+
+.win-visible,
+.lose-visible,
+.welcome-visible,
+.end-visible,
+.players-turn-visible,
+.computers-turn-visible {
+	.accessibly-hidden;
+}
+
+.welcome {
+	.welcome-visible {
+		.accessibly-unhidden;
+	}
+}
+
+.end {
+	.end-visible {
+		.accessibly-unhidden;
+	}
+}
+
+.computers-turn {
+	.computers-turn-visible {
+		.accessibly-unhidden;
+	}
+}
+
+.players-turn {
+	.players-turn-visible {
+		.accessibly-unhidden;
+	}
+}
+
+.lose {
+	.lose-visible {
+		.accessibly-unhidden;
+	}
+}
+
+.win {
+	.win-visible {
+		.accessibly-unhidden;
+	}
+}
+
+.legend {
+	.square {
+		.square(1em);
+	}
+}

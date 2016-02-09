@@ -74,13 +74,29 @@ describe('Battleships', function() {
 			expect(battleship.length).toBe(1);
 			expect(destroyers.length).toBe(2);
 		});
+
+		it('should have all ships undestroyed', function() {
+			var ships = human.getShips();
+
+			expect(human.areAllShipsDestroyed()).toBe(false);
+		});
+
+		it('should know if all its ships are destroyed', function() {
+			human.getShips().map(function(ship) {
+				ship.position.coordinates.map(function(coords) {
+					game.grid.target(coords);
+				});
+			});
+
+			expect(human.areAllShipsDestroyed()).toBe(true);
+		});
 	});	// the Players
 
 	describe('the Ship(s)', function() {
 		var battleship;
 
 		beforeEach(function() {
-			battleship = new Game().createBattleship();
+			battleship = new Game().createBattleship('test');
 		});
 
 		it('should have a size', function() {
@@ -89,6 +105,10 @@ describe('Battleships', function() {
 
 		it('should have a type', function() {
 			expect(battleship.type).toBeDefined();
+		});
+
+		it('should have an owner', function() {
+			expect(battleship.owner).toBeDefined();
 		});
 
 		it('should have an unset position', function() {
@@ -134,9 +154,9 @@ describe('Battleships', function() {
 
 		it('should error for invalid positions', function() {
 			var destroyer = game.createDestroyer();
-			expect(function() { grid.setPosition(destroyer, {x: 6, y: 0, vertical: false}) }).toThrow(new Error('invalid position'));
+			expect(function() { grid.setPosition(destroyer, {x: 7, y: 0, vertical: false}) }).toThrow(new Error('invalid position'));
 			expect(function() { grid.setPosition(destroyer, {x: 6, y: -1, vertical: false}) }).toThrow(new Error('invalid position'));
-			expect(function() { grid.setPosition(destroyer, {x: 0, y: 6, vertical: true}) }).toThrow(new Error('invalid position'));
+			expect(function() { grid.setPosition(destroyer, {x: 0, y: 7, vertical: true}) }).toThrow(new Error('invalid position'));
 		});
 
 		it('should locate a ship given a position', function() {
@@ -159,6 +179,26 @@ describe('Battleships', function() {
 			expect(grid.target(coordinates)).toBe(true);
 			expect(destroyer.damage.length).toBe(1);
 			expect(destroyer.damage[0]).toEqual(coordinates);
+		});
+
+		it('should get the projection given coordinates', function() {
+			var horizontalProjection = grid.getProjection({x:0, y:0, vertical:false, size:4})
+					, verticalProjection = grid.getProjection({x:0, y:0, vertical:true, size:4})
+					, expectedHorizontalProjection = [
+						{x: 0, y: 0}
+						, {x: 1, y: 0}
+						, {x: 2, y: 0}
+						, {x: 3, y: 0}
+					]
+					, expectedVerticalProjection = [
+						{x: 0, y: 0}
+						, {x: 0, y: 1}
+						, {x: 0, y: 2}
+						, {x: 0, y: 3}
+					]
+
+			expect(horizontalProjection).toEqual(expectedHorizontalProjection);
+			expect(verticalProjection).toEqual(expectedVerticalProjection);
 		});
 	}); // the Grid
 

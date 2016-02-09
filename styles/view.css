@@ -45,38 +45,6 @@ td input input:checked + span {
   display: inline-block;
   z-index: -2;
 }
-.ship-text {
-  font-size: 0.6em;
-  line-height: 1.2em;
-  position: absolute;
-  top: 0;
-  left: 0;
-  text-align: center;
-}
-td.destroyer {
-  border: 1px red solid;
-}
-td.destroyer span:before {
-  content: "D";
-  font-size: 0.6em;
-  line-height: 1.2em;
-  position: absolute;
-  top: 0;
-  left: 0;
-  text-align: center;
-}
-td.battleship {
-  border: 1px blue solid;
-}
-td.battleship span:before {
-  content: "B";
-  font-size: 0.6em;
-  line-height: 1.2em;
-  position: absolute;
-  top: 0;
-  left: 0;
-  text-align: center;
-}
 .container {
   margin: 0 auto;
   padding-left: 1em;
@@ -86,6 +54,9 @@ header {
   text-align: center;
   padding-top: 1.5em;
   padding-bottom: 1.5em;
+}
+.list-unstyled {
+  list-style: none;
 }
 @media (min-width: 52em) {
   .container {
@@ -104,6 +75,38 @@ header {
     width: 33em;
   }
 }
+.ship-text {
+  font-size: 0.6em;
+  line-height: 1.2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+}
+.foe {
+  border: 1px red solid;
+}
+.friend {
+  border: 1px blue solid;
+}
+.destroyer span:before {
+  content: "D";
+  font-size: 0.6em;
+  line-height: 1.2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+}
+.battleship span:before {
+  content: "B";
+  font-size: 0.6em;
+  line-height: 1.2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+}
 @keyframes boom {
   0% {
     background: white;
@@ -118,7 +121,80 @@ header {
     background: red;
   }
 }
+@keyframes miss {
+  0% {
+    background: white;
+  }
+  25% {
+    background: darkslategray;
+  }
+  50% {
+    background: darkslateblue;
+  }
+  100% {
+    background: darkslategray;
+  }
+}
 .boom + span {
   background-color: red;
   animation: boom 1s ease-in-out;
+}
+.miss + span {
+  background-color: darkslategray;
+  animation: miss 1s ease-in-out;
+}
+.accessibly-hidden {
+  position: absolute;
+  left: 500%;
+  bottom: 500%;
+}
+.accessibly-unhidden {
+  position: relative;
+  left: auto;
+  bottom: auto;
+}
+.win-visible,
+.lose-visible,
+.welcome-visible,
+.end-visible,
+.players-turn-visible,
+.computers-turn-visible {
+  position: absolute;
+  left: 500%;
+  bottom: 500%;
+}
+.welcome .welcome-visible {
+  position: relative;
+  left: auto;
+  bottom: auto;
+}
+.end .end-visible {
+  position: relative;
+  left: auto;
+  bottom: auto;
+}
+.computers-turn .computers-turn-visible {
+  position: relative;
+  left: auto;
+  bottom: auto;
+}
+.players-turn .players-turn-visible {
+  position: relative;
+  left: auto;
+  bottom: auto;
+}
+.lose .lose-visible {
+  position: relative;
+  left: auto;
+  bottom: auto;
+}
+.win .win-visible {
+  position: relative;
+  left: auto;
+  bottom: auto;
+}
+.legend .square {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
 }

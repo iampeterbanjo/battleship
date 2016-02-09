@@ -1,3 +1,18 @@
+# Battleship
+
+creates a battleship
+
+# chronometer
+
+Converts a string or number point
+to string between A-J or number between 0 - 9
+
+**Parameters**
+
+-   `z` **string or number** 
+
+Returns **string or number** result
+
 # createTwoDimensionalArray
 
 Creates a two dimensional array for the board
@@ -14,6 +29,16 @@ Find a ship on the board given the coordinates
 -   `coordinates` **Object** 
     -   `coordinates.x` **number** 
     -   `coordinates.y` **number** 
+
+# getProjection
+
+Return all the squares on the grid
+the ship of a certain size and orientation
+will occupy given the coordinates
+
+**Parameters**
+
+-   `coordinates`  
 
 # init
 
@@ -40,6 +65,17 @@ ship located there
     -   `coordinates.x` **number** 
     -   `coordinates.y` **number** 
 
+# validPoint
+
+Checks a point is between the range
+of the grid
+
+**Parameters**
+
+-   `point` **number** 
+
+Returns **boolean** 
+
 # validPosition
 
 Checks if the proposed location for a ship
@@ -63,6 +99,10 @@ Gets a random int between min and max
 
 Returns **number** 
 
+# quadrant
+
+get the next quadrant
+
 # computer
 
 Computer player can guess
@@ -84,15 +124,27 @@ Coordinates to access grid point x and y
 
 Creates Battleships
 
+**Parameters**
+
+-   `owner` **string** 
+
 Returns **Ship** battleship
 
 # createDestroyer
 
 Creates Destroyers
 
+**Parameters**
+
+-   `owner` **string** 
+
 Returns **Ship** destroyer
 
 # damage
+
+# Destroyer
+
+creates a destroyer
 
 # getShips
 
@@ -146,9 +198,15 @@ where values in first overwrite second
 
 Returns **Object** merged
 
+# owner
+
 # Player
 
 A Player has 1 Battleshp and 2 Destroyers
+
+**Parameters**
+
+-   `owner` **string** 
 
 # position
 
