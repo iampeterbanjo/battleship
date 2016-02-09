@@ -1,6 +1,6 @@
 # Battleship - a turn by turn game
 
-[Play online](https://iampeterbanjo.io/battleship)
+[Play online](https://iampeterbanjo.github.io/battleship/)
 
 ## Rules
 - There are two players: you vs the computer
