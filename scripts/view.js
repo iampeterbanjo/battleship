@@ -49,8 +49,8 @@
 			this.watchTargeting();
 			this.watchControls();
 			// dev only
-			this.drawShips(this.human.getShips());
-			this.drawShips(this.computer.getShips());
+			// this.drawShips(this.human.getShips());
+			// this.drawShips(this.computer.getShips());
 		}
 		/**
 		 * Change state of play
