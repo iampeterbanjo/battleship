@@ -59,7 +59,7 @@
 		, changeState: function(status) {
 			var gameStatus = status.toUpperCase()
 					, body = $$('body')
-					, statusClasses = ['players-turn', 'computers-turn', 'welcome', 'end'];
+					, statusClasses = ['players-turn', 'computers-turn', 'welcome', 'end', 'win', 'lose'];
 
 			statusClasses.map(function(klass) {
 				body.classList.remove(klass);
@@ -77,6 +77,12 @@
 					break;
 				case 'COMPUTERS_TURN':
 					body.classList.add('computers-turn');
+					break;
+				case 'PLAYER_WINS':
+					body.classList.add('win', 'end');
+					break;
+				case 'COMPUTER_WINS':
+					body.classList.add('lose', 'end');
 					break;
 				default:
 					break;
@@ -155,8 +161,13 @@
 			}
 		}
 		, checkForWinner: function() {
-			
+			if(this.human.areAllShipsDestroyed()) {
+				this.changeState('COMPUTER_WINS')
+			}
 
+			if(this.computer.areAllShipsDestroyed()) {
+				this.changeState('PLAYER_WINS')
+			}
 		}
 		/** Update score board*/
 		, updateScores: function() {
