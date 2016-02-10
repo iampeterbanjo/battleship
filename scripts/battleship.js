@@ -136,7 +136,7 @@ var Game = Game || function() {
 		, target: function(coordinates, player) {
 			var ship = this.getPosition(coordinates)
 					, hit = false;
-			if(ship && ship.owner !== player.name) {
+			if(ship && ship.owner === player.name) {
 				ship.damage.push(coordinates);
 				hit = true;
 			}

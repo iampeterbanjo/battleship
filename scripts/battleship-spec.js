@@ -89,7 +89,7 @@ describe('Battleships', function() {
 		it('should know if all its ships are destroyed', function() {
 			human.getShips().map(function(ship) {
 				ship.position.coordinates.map(function(coords) {
-					game.grid.target(coords, computer);
+					game.grid.target(coords, human);
 				});
 			});
 
@@ -183,7 +183,7 @@ describe('Battleships', function() {
 
 			grid.setPosition(destroyer, position);
 
-			expect(grid.target(coordinates, computer)).toBe(true);
+			expect(grid.target(coordinates, human)).toBe(true);
 			expect(destroyer.damage.length).toBe(1);
 			expect(destroyer.damage[0]).toEqual(coordinates);
 		});
@@ -242,7 +242,7 @@ describe('Battleships', function() {
 
 			game.grid.setPosition(destroyer, {x: 0, y: 0, vertical: false});
 			for (var index = 0; index < destroyer.size; index++) {
-				game.grid.target({x: index, y: 0}, computer);
+				game.grid.target({x: index, y: 0}, human);
 			}
 			expect(destroyer.isDestroyed()).toBe(true);
 		});
