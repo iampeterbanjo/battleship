@@ -188,7 +188,7 @@
 		*/
 		, aim: function(coordinates, input) {
 			var me = this
-					, hit = game.grid.target(coordinates);
+					, hit = game.grid.target(coordinates, this.computer);
 
 			input.checked = true;
 

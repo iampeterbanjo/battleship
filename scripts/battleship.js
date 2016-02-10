@@ -92,6 +92,7 @@ var Game = Game || function() {
 							, start: position.y
 							, end: position.vertical ? position.y + ship.size : position.x + ship.size
 							, damage: ship.damage
+							, owner: ship.owner
 							, coordinates: []
 						}
 						, newX, newY;
@@ -127,17 +128,20 @@ var Game = Game || function() {
 		 * Targets a position on the grid and damages any
 		 * ship located there
 		 * @param {Object} coordinates
-		 * @param {Player} player
 		 * @param {number} coordinates.x
 		 * @param {number} coordinates.y
+		 * @param {Player} player
+		 * @returns {boolean} hit
 		 */
 		, target: function(coordinates, player) {
-			var ship = this.getPosition(coordinates);
+			var ship = this.getPosition(coordinates)
+					, hit = false;
 			if(ship && ship.owner !== player.name) {
 				ship.damage.push(coordinates);
+				hit = true;
 			}
 
-			return !!ship;
+			return hit;
 		}
 	}
 

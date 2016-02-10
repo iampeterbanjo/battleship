@@ -66,6 +66,8 @@ ship located there
     -   `coordinates.y` **number** 
 -   `player` **Player** 
 
+Returns **boolean** hit
+
 # validPoint
 
 Checks a point is between the range

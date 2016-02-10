@@ -238,7 +238,7 @@ describe('Battleships', function() {
 		});
 
 		it('should destroy completely damaged ships', function() {
-			var destroyer = human.getShips()[0];
+			var destroyer = human.getShips()[1];
 
 			game.grid.setPosition(destroyer, {x: 0, y: 0, vertical: false});
 			for (var index = 0; index < destroyer.size; index++) {
