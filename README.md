@@ -10,8 +10,16 @@
 - When a player hits a ship they get another turn
 - Destroyer all the computer's ships to win
 
+## Development
 
-# ISC License (ISC)
+- `npm install`
+- `npm start`
+
+## Testing
+
+- `npm test`
+
+## ISC License (ISC)
 
 Copyright (c) 2016 year, Company or Person's Name peterbanjo at gmail dot com
 
