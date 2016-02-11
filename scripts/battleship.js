@@ -13,7 +13,11 @@ var Game = Game || function() {
 		, createTwoDimensionalArray: function() {
 			var twoDimensions = new Array(this.height);
 			for (var y = 0; y < this.height; y++) {
-				twoDimensions[y] = new Array(this.width).fill(false);
+				twoDimensions[y] = new Array(this.width);
+
+				for (var x = 0; x < this.width; x++) {
+					twoDimensions[y][x] = false;
+				}
 			}
 
 			return twoDimensions;
@@ -448,7 +452,11 @@ var Game = Game || function() {
 		this.name = owner;
 		// fill the array or else map wont work
 		/** @member {Ships[]} */
-		this.ships = new Array(3).fill(0);
+		this.ships = new Array(3);
+		for (var index = 0; index < this.ships.length; index++) {
+			this.ships[index] = 0;
+		}
+
 		/** @constructor */
 		this.init = function() {
 			this.ships = this.ships.map(function(ship, index) {
