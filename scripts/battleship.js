@@ -20,7 +20,9 @@ var Game = Game || function() {
 		}
 		/** @constructor */
 		, init: function() {
-			this.board = this.createTwoDimensionalArray();
+			this.board = {};
+			this.board.friend = this.createTwoDimensionalArray();
+			this.board.foe = this.createTwoDimensionalArray();
 		}
 		/**
 		 * Checks if the proposed location for a ship
@@ -107,7 +109,7 @@ var Game = Game || function() {
 					}
 
 					pos.coordinates.push({x: newX, y: newY});
-					this.board[newY][newX] = pos;
+					this.board[ship.owner][newY][newX] = pos;
 				}
 
 				ship.position = pos;
@@ -120,9 +122,10 @@ var Game = Game || function() {
 		 * @param {Object} coordinates
 		 * @param {number} coordinates.x
 		 * @param {number} coordinates.y
+		 * @param {string} name
 		 */
-		, getPosition: function(coordinates) {
-			return this.board[coordinates.y][coordinates.x];
+		, getPosition: function(coordinates, name) {
+			return this.board[name][coordinates.y][coordinates.x];
 		}
 		/**
 		 * Targets a position on the grid and damages any
@@ -134,7 +137,7 @@ var Game = Game || function() {
 		 * @returns {boolean} hit
 		 */
 		, target: function(coordinates, player) {
-			var ship = this.getPosition(coordinates)
+			var ship = this.getPosition(coordinates, player.name)
 					, hit = false;
 			if(ship && ship.owner === player.name) {
 				ship.damage.push(coordinates);

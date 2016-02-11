@@ -132,12 +132,10 @@ describe('Battleships', function() {
 	describe('the Grid', function() {
 		var grid, game, human, computer;
 
-		beforeEach(function() {
+		beforeAll(function() {
 			game = new Game();
 			grid = game.grid;
 			grid.init();
-			human = game.human();
-			computer = game.computer();
 		});
 
 		it('should have a way to get/set a position on the grid', function() {
@@ -148,6 +146,8 @@ describe('Battleships', function() {
 		it('should set a position', function() {
 			var battleship = game.createBattleship()
 					, position = {x: 2, y: 2, vertical: false};
+
+			battleship.owner = 'friend';
 
 			expect(battleship.position).toBe(0);
 
@@ -168,15 +168,21 @@ describe('Battleships', function() {
 
 		it('should locate a ship given a position', function() {
 			var destroyer = game.createDestroyer()
-					, position = {x: 2, y: 2, vertical: false};
+					, position = {x: 2, y: 2, vertical: false}
+					, player = { name: 'foe' };
+
+			destroyer.owner = player.name;
 
 			grid.setPosition(destroyer, position);
 
-			expect(grid.getPosition({x: 0, y: 0})).toBe(false);
-			expect(grid.getPosition({x: position.x, y: position.y}).type).toBe('destroyer');
+			expect(grid.getPosition({x: 0, y: 0}, player.name)).toBe(false);
+			expect(grid.getPosition({x: position.x, y: position.y}, player.name).type).toBe('destroyer');
 		});
 
 		it('should damage a targeted ship', function() {
+			human = game.human();
+			computer = game.computer();
+
 			var destroyer = human.getShips()[1]
 					, position = {x: 2, y: 2, vertical: false}
 					, coordinates = {x: position.x, y: position.y};

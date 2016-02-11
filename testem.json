@@ -1,5 +1,6 @@
 {
-	"src_files": [
+	"framework": "jasmine2"
+	, "src_files": [
 		"scripts/**/*.js"
 	]
 	, "src_files_ignore": "scripts/view.js"

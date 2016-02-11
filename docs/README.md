@@ -29,6 +29,7 @@ Find a ship on the board given the coordinates
 -   `coordinates` **Object** 
     -   `coordinates.x` **number** 
     -   `coordinates.y` **number** 
+-   `name` **string** 
 
 # getProjection
 
