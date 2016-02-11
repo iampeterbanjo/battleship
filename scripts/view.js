@@ -19,6 +19,19 @@
 		return document.createElement(type);
 	}
 
+	/**
+	 * Are we debugging?
+	 * @returns {boolean} isDebugging
+	*/
+	function isDockedInspectorOpen() {
+		var isDebugging = (window.outerHeight - window.innerHeight) > 100;
+		if (isDebugging) {
+			console.log('** Docked inspector open >> Debug mode on << **');
+		}
+
+		return isDebugging;
+	}
+
 	function GameView() {
 		/** @member {Element} */
 		this.gridElement = $$('.grid');
@@ -49,8 +62,10 @@
 			this.watchTargeting();
 			this.watchControls();
 			// dev only
-			this.drawShips(this.human.getShips());
-			this.drawShips(this.computer.getShips());
+			if(isDockedInspectorOpen()) {
+				this.drawShips(this.human.getShips());
+				this.drawShips(this.computer.getShips());
+			}
 		}
 		/**
 		 * Change state of play
