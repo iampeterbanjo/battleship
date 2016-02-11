@@ -34,7 +34,9 @@
 
 	function GameView() {
 		/** @member {Element} */
-		this.gridElement = $$('.grid');
+		this.gridFriend = $$('.grid.friend');
+		/** @member {Element} */
+		this.gridFoe = $$('.grid.foe');
 		/** @member {Element} */
 		this.playerScore = $$('#player-score');
 		/** @member {Element} */
@@ -47,6 +49,7 @@
 		this.playersTurn = true;
 		/** @member {number} */
 		this.computerTimeout = 1000;
+		this.missTimeout = 1000;
 		this.scores = { player: 0 , computer: 0 };
 	}
 
@@ -57,7 +60,9 @@
 		 * @constructor
 		 */
 		init: function() {
-			this.drawGrid();
+			this.drawGrid(this.gridFriend);
+			this.drawGrid(this.gridFoe);
+
 			this.changeState('welcome');
 			this.watchTargeting();
 			this.watchControls();
@@ -114,7 +119,7 @@
 		/**
 		 * Draw the Game grid as a table
 		*/
-		, drawGrid: function() {
+		, drawGrid: function(grid) {
 			var fragment = document.createDocumentFragment()
 					, tr, td, checkbox, span;
 
@@ -139,11 +144,11 @@
 				fragment.appendChild(tr);
 			}
 
-			this.gridElement.innerHTML = '';
-			this.gridElement.appendChild(fragment);
+			grid.innerHTML = '';
+			grid.appendChild(fragment);
 		}
 		, drawShips: function(ships) {
-			var coords, pos, ship, element;
+			var coords, pos, ship, element, selector;
 
 			for (var index = 0; index < ships.length; index++) {
 				ship = ships[index];
@@ -151,7 +156,8 @@
 
 				coords.map(function(item, index) {
 					pos = game.mapCoordinates(item);
-					element = $$('[data-coords="' + pos + '"]');
+					selector = '.grid.' + ship.owner + ' [data-coords="' + pos + '"]';
+					element = $$(selector);
 					element.classList.add(ship.type);
 					element.classList.add(ship.owner);
 				});
@@ -200,10 +206,11 @@
 		 * How players take shots at coordinates
 		 * @param {Coordinates} coordinates
 		 * @param {Element} input
+		 * @param {Player} opponent
 		*/
-		, aim: function(coordinates, input) {
+		, aim: function(coordinates, input, opponent) {
 			var me = this
-					, hit = game.grid.target(coordinates, this.computer);
+					, hit = game.grid.target(coordinates, opponent);
 
 			input.checked = true;
 
@@ -215,6 +222,7 @@
 				input.classList.add('miss');
 			}
 
+			// hit or miss
 			if(!hit) {
 				this.next();
 			} else {
@@ -232,7 +240,7 @@
 		*/
 		, watchTargeting: function() {
 			var me = this;
-			this.gridElement.addEventListener('click', function(event) {
+			this.gridFoe.addEventListener('click', function(event) {
 				if(!me.playersTurn) {
 					return;
 				}
@@ -241,8 +249,7 @@
 						, x = parseInt(input.getAttribute('data-x'), 10)
 						, y = parseInt(input.getAttribute('data-y'), 10)
 						, coordinates = {x: x, y: y};
-
-				me.aim(coordinates, input);
+				me.aim(coordinates, input, me.computer);
 			});
 		}
 		/**
@@ -251,9 +258,9 @@
 		, computersTurn: function() {
 			var coordinates = this.computer.guess()
 					, position = game.mapCoordinates(coordinates)
-					, input = $$('[data-coords="' + position + '"] input');
+					, input = $$('.grid.friend [data-coords="' + position + '"] input');
 
-			this.aim(coordinates, input);
+			this.aim(coordinates, input, this.human);
 		}
 		/**
 		 * Lets the player change the state of the game
