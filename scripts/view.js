@@ -197,7 +197,7 @@
 				this.playerScore.innerHTML = this.scores.player;
 			} else {
 				this.scores.computer += 1;
-				this.computerScore.innerHTML = this.scores.player;
+				this.computerScore.innerHTML = this.scores.computer;
 			}
 
 			this.checkForWinner();
