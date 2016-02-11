@@ -17,6 +17,14 @@
 					Enemy ships are invading and we need your help. Choose a position on the grid to destroy them. You have 2 destoryers and 1 battleship but so do they - good luck!
 				</p>
 				<p class="next-instructions">Select a square to attack</p>
+				<ul class="legend list-unstyled">
+					<li>
+						<span class="friend square"></span> Yours
+					</li>
+					<li>
+						<span class="foe square"></span> Enemy
+					</li>
+				</ul>
 			</div>
 			<!--/welcome-->
 
@@ -27,15 +35,6 @@
 
 				<p>Thank you for playing</p>
 				<p>Press start to begin a new game</p>
-
-				<ul class="legend list-unstyled">
-					<li>
-						<span class="friend square"></span> Yours
-					</li>
-					<li>
-						<span class="foe square"></span> Enemy
-					</li>
-				</ul>
 			</div>
 			<!--/end-->
 
@@ -63,8 +62,12 @@
 			<!--/controls-->
 		</div>
 		<div class="main">
-			<table class="grid foe"></table>
-			<table class="grid friend"></table>
+			<div class="columns wrap-grid-foe">
+				<table class="grid foe"></table>
+			</div>
+			<div class="columns wrap-grid-friend">
+				<table class="grid friend"></table>
+			</div>
 		</div>
 	</section>
 
