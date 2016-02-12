@@ -1,5 +1,7 @@
 # Battleship - a turn by turn game
 
+[![Circle CI](https://circleci.com/gh/iampeterbanjo/battleship.svg?style=svg)](https://circleci.com/gh/iampeterbanjo/battleship)
+
 [Play online](https://iampeterbanjo.github.io/battleship/)
 
 ## Rules
