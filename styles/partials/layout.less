@@ -25,6 +25,10 @@ tr:nth-child(2n+1) td:after {
 	z-index: -3;
 }
 
+td input:not(.hit):not(.miss) + span {
+	display: none;
+}
+
 tr:nth-child(2n+1) td:after,
 td input:checked + span,
 td:before {

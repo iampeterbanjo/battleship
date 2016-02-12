@@ -129,6 +129,7 @@ var Game = Game || function() {
 		 * @param {string} name
 		 */
 		, getPosition: function(coordinates, name) {
+			console.log('y %s, x %s', coordinates.y, coordinates.x);
 			return this.board[name][coordinates.y][coordinates.x];
 		}
 		/**

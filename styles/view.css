@@ -21,6 +21,9 @@ tr:nth-child(2n+1) td:after {
   background: #ededed;
   z-index: -3;
 }
+td input:not(.hit):not(.miss) + span {
+  display: none;
+}
 tr:nth-child(2n+1) td:after,
 td input:checked + span,
 td:before {
@@ -108,7 +111,7 @@ header {
   left: 0;
   text-align: center;
 }
-@keyframes boom {
+@keyframes hit {
   0% {
     background: white;
   }
@@ -136,7 +139,7 @@ header {
     background: darkslategray;
   }
 }
-.boom + span {
+.hit + span {
   background-color: red;
   animation: boom 1s ease-in-out;
 }

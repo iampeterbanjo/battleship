@@ -214,18 +214,9 @@
 
 			input.checked = true;
 
-			if(game.grid.validPoint(coordinates.x)
-			&& game.grid.validPoint(coordinates.y) && hit) {
-				// alert('boom!');
-				input.classList.add('boom');
-			} else {
-				input.classList.add('miss');
-			}
+			if(hit) {
+				input.classList.add('hit');
 
-			// hit or miss
-			if(!hit) {
-				this.next();
-			} else {
 				this.updateScores();
 
 				if(!this.playersTurn) {
@@ -233,6 +224,9 @@
 						me.computersTurn();
 					}, me.computerTimeout);
 				}
+			} else {
+				this.next();
+				input.classList.add('miss');
 			}
 		}
 		/**
@@ -241,7 +235,8 @@
 		, watchTargeting: function() {
 			var me = this;
 			this.gridFoe.addEventListener('click', function(event) {
-				if(!me.playersTurn) {
+				if(!me.playersTurn
+				|| event.target.tagName.toLowerCase() !== 'input') {
 					return;
 				}
 
@@ -249,7 +244,11 @@
 						, x = parseInt(input.getAttribute('data-x'), 10)
 						, y = parseInt(input.getAttribute('data-y'), 10)
 						, coordinates = {x: x, y: y};
-				me.aim(coordinates, input, me.computer);
+
+				if(game.grid.validPoint(x)
+				&& game.grid.validPoint(y)) {
+					me.aim(coordinates, input, me.computer);
+				}
 			});
 		}
 		/**
